@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {Apps, ContactInfo, Cursor, Servers as ServersIcon, User} from 'grommet-icons';
-import {Box, Button, Collapsible, Grommet, Heading, Menu, MenuButton, Text} from 'grommet';
+import {Box, Button, RoutedButton, Collapsible, Grommet, Heading, Menu, MenuButton, Text} from 'grommet';
 
 import {theme} from "../../__theme/theme";
 import {AppBar} from "../../Common/AppBar";
@@ -31,6 +31,7 @@ class CoreLayout extends Component {
                     <AppBar>
 
                         <Box justify="left">
+
                             <Button
                                 alignSelf="start"
                                 icon={<Apps/>}
@@ -82,9 +83,9 @@ class CoreLayout extends Component {
                                      margin='small'
                                      textAlign="end">
 
-                                    <Button hreh="#" hoverIndicator>
+                                    <RoutedButton path="/shortlist" hoverIndicator>
                                         <ServersIcon size="medium"/>
-                                    </Button>
+                                    </RoutedButton>
                                     <Text size="xsmall" textAlign="center" style={{textAlign: 'center'}}>ShortList</Text>
                                 </Box>
 
@@ -95,9 +96,9 @@ class CoreLayout extends Component {
                                     margin='small'
                                     textAlign="end"
                                 >
-                                    <Button hreh="#" hoverIndicator>
+                                    <RoutedButton path="/profile-analysis" hoverIndicator>
                                         <ContactInfo size="medium"/>
-                                    </Button>
+                                    </RoutedButton>
 
                                     <Text size="xsmall" textAlign="center">Profile Analysis </Text>
                                 </Box>
@@ -114,9 +115,9 @@ class CoreLayout extends Component {
                                     align="center"
                                     margin='small'
                                 >
-                                    <Button hreh="#" hoverIndicator>
+                                    <RoutedButton path="/demo" hoverIndicator>
                                         <Cursor size="medium"/>
-                                    </Button>
+                                    </RoutedButton>
                                     <Text size="xsmall" alignSelf="center" textAlign={"center"}>Demo</Text>
                                 </Box>
                             </Box>
