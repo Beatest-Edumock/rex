@@ -6,6 +6,9 @@ import {Box, Button, RoutedButton, Collapsible, Grommet, Heading, Menu, MenuButt
 import {theme} from "../../__theme/theme";
 import {AppBar} from "../../Common/AppBar";
 
+import { matchPath } from "react-router-dom";
+import {withRouter} from 'react-router-dom';
+
 
 /**
  * This Component displays the App Bar and the sidebar.
@@ -16,17 +19,20 @@ import {AppBar} from "../../Common/AppBar";
  *
  * All children passed to this prop will be displayed in the content ("main") area.
  */
-class CoreLayout extends Component {
+class CoreLayoutWithRouter extends Component {
     state = {
         showSidebar: true,
     };
 
     render() {
+
+        console.log(this.props.location.pathname);
         const {showSidebar} = this.state;
 
         return (
             <Grommet full theme={theme}>
                 <Box fill>
+                    {this.context.router}
 
                     <AppBar>
 
@@ -78,30 +84,30 @@ class CoreLayout extends Component {
                                  width="xsmall">
 
                                 {/*Below are the different core areas that the user can navigate to*/}
-                                <Box gap="xsmall"
-                                     align="center"
-                                     margin='small'
-                                     textAlign="end">
-
-                                    <RoutedButton path="/shortlist" hoverIndicator>
+                                <RoutedButton active={"/shortlist" === this.props.location.pathname}  path="/shortlist" hoverIndicator>
+                                    <Box
+                                        pad={{vertical: "small"}}
+                                        gap="xsmall"
+                                        align="center"
+                                        justify="center"
+                                    >
                                         <ServersIcon size="medium"/>
-                                    </RoutedButton>
-                                    <Text size="xsmall" textAlign="center" style={{textAlign: 'center'}}>ShortList</Text>
-                                </Box>
+                                        <Text size="xsmall" alignSelf="center" textAlign={"center"}>ShortList</Text>
+                                    </Box>
+                                </RoutedButton>
 
 
-                                <Box
-                                    gap="xsmall"
-                                    align="center"
-                                    margin='small'
-                                    textAlign="end"
-                                >
-                                    <RoutedButton path="/profile-analysis" hoverIndicator>
+                                <RoutedButton active={"/profile-analysis" ===this.props.location.pathname}   path="/profile-analysis" hoverIndicator>
+                                    <Box
+                                        pad={{vertical: "small"}}
+                                        gap="xsmall"
+                                        align="center"
+                                        justify="center"
+                                    >
                                         <ContactInfo size="medium"/>
-                                    </RoutedButton>
-
-                                    <Text size="xsmall" textAlign="center">Profile Analysis </Text>
-                                </Box>
+                                        <Text size="xsmall" alignSelf="center" textAlign={"center"}>Profile Analysis</Text>
+                                    </Box>
+                                </RoutedButton>
 
 
                                 {/*The "demo" page is pushed all the way to the bottom*/}
@@ -112,13 +118,20 @@ class CoreLayout extends Component {
                                     gap="xsmall"
                                     alignContent="stretch"
                                     alignSelf="stretch"
-                                    align="center"
-                                    margin='small'
+                                    align="stretch"
+                                    margin='none'
                                 >
-                                    <RoutedButton path="/demo" hoverIndicator>
-                                        <Cursor size="medium"/>
+                                    <RoutedButton active={"/demo" ===this.props.location.pathname}  path="/demo" hoverIndicator>
+                                        <Box
+                                            pad={{vertical: "small"}}
+                                            gap="xsmall"
+                                            align="center"
+                                            justify="center"
+                                        >
+                                            <Cursor size="medium"/>
+                                            <Text size="xsmall" alignSelf="center" textAlign={"center"}>Demo</Text>
+                                        </Box>
                                     </RoutedButton>
-                                    <Text size="xsmall" alignSelf="center" textAlign={"center"}>Demo</Text>
                                 </Box>
                             </Box>
                         </Collapsible>
@@ -131,4 +144,4 @@ class CoreLayout extends Component {
     }
 }
 
-export {CoreLayout};
+export const CoreLayout = withRouter(CoreLayoutWithRouter);

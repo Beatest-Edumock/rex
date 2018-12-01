@@ -1,10 +1,12 @@
 {
   "global": {
+
     "colors": {
       "brand": "light-2",
+      "active": "dark-6",
       "accent": [
-        "#265973",
-        "#732659"
+        "dark-2",
+        "dark-2"
       ]
     },
     "input": {
@@ -19,6 +21,9 @@
     }
   },
   "button": {
+    "disabled":{
+      "opacity":1.0
+    },
     "border": {
       "radius": "0px"
     }
