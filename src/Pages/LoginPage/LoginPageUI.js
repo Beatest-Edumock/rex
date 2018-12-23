@@ -40,7 +40,7 @@ class LoginPageUI extends React.Component {
                         ({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting,}) => (
 
                             <React.Fragment>
-                                <Heading alignSelf="center" level={4} color="status-critical">{values.info}</Heading>
+                                <Heading alignSelf="center" level={4} color="status-critical">{errors.info}</Heading>
 
                                 <form onSubmit={event => {
                                     event.preventDefault();
