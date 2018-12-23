@@ -59,25 +59,36 @@ const columnsDiff = [
         accessor: "name",
     },
     {
-        Header: "Section Cutoffs",
+        Header: props => <Text size={"xsmall"}>Section <br/> Cutoffs</Text>,
         columns: [
 
             {
                 Header: "1",
-                Footer: "Count",
                 accessor: "section_1_score",
-                maxWidth: 70,
-                Cell: props => <Box round="xsmall" basis="full" fill pad={{horizontal: "small"}}
-                                    background={props.value < 15 ? "status-critical" : "status-ok"}>
-                    <Text textAlign="end">{props.value}</Text></Box>
+                resizable: false,
+                maxWidth: 45,
+                Cell: props => <Box round="xsmall"
+                                    basis="full"
+                                    align="center"
+                                    justify="center"
+                                    pad={{horizontal: "small", vertical: "xsmall"}}
+                                    background={props.value < 0 ? "status-critical" : "status-ok"}>
+                    <Text textAlign="center" size="xsmall"> {props.value}</Text>
+
+                </Box>
             },
             {
                 Header: "2",
                 accessor: "section_2_score",
-                maxWidth: 70,
-                Cell: props => <Box round="xsmall" basis="full" fill pad={{horizontal: "small"}}
-                                    background={props.value < 15 ? "status-critical" : "status-ok"}>
-                    <Text textAlign="end"> {props.value}</Text>
+                resizable: false,
+                maxWidth: 45,
+                Cell: props => <Box round="xsmall"
+                                    basis="full"
+                                    align="center"
+                                    justify="center"
+                                    pad={{horizontal: "small", vertical: "xsmall"}}
+                                    background={props.value < 0 ? "status-critical" : "status-ok"}>
+                    <Text textAlign="center" size="xsmall"> {props.value}</Text>
                 </Box>
             },
 
@@ -85,11 +96,16 @@ const columnsDiff = [
         ]
     },
     {
-        Header: "Total Score",
+        Header: props => <Text size={"xsmall"}>Total <br/> Score</Text>,
         accessor: "total_score",
-        maxWidth: 70,
-        Cell: props => <Box round="xsmall" basis="1/2" fill pad={{horizontal: "small"}} background={props.value < 0 ? "status-critical" : "status-ok"}>
-            <Text textAlign="end"> {props.value}</Text>
+        maxWidth: 45,
+        Cell: props => <Box round="xsmall"
+                            basis="full"
+                            align="center"
+                            justify="center"
+                            pad={{horizontal: "small", vertical: "xsmall"}}
+                            background={props.value < 0 ? "status-critical" : "status-ok"}>
+            <Text textAlign="center" size="xsmall"> {props.value}</Text>
         </Box>
     }
 ];
@@ -98,16 +114,42 @@ function ShortListUI() {
     return (
 
         <Box fill>
-            <Box height={"90%"}>
+            <Box height={"90%"} margin={'small'}>
+                <ReactTable
+                    className="-highlight -striped"
+                    getTdProps={(state, rowInfo, column, instance) => {
+                        return {
+                            onClick: (e, handleOriginal) => {
+                                console.log("A Td Element was clicked!");
+                                console.log("it produced this event:", e);
+                                console.log("It was in this column:", column);
+                                console.log("It was in this row:", rowInfo);
+                                console.log("It was in this table instance:", instance);
 
-                <ReactTable filterable={true} data={arr} columns={columnsDiff}>
+                                // IMPORTANT! React-Table uses onClick internally to trigger
+                                // events like expanding SubComponents and pivots.
+                                // By default a custom 'onClick' handler will override this functionality.
+                                // If you want to fire the original onClick handler, call the
+                                // 'handleOriginal' function.
+                                if (handleOriginal) {
+                                    handleOriginal();
+                                }
+                            }
+                        };
+                    }
+                    }
+
+
+                    filterable={true}
+                    data={arr}
+                    columns={columnsDiff}>
                 </ReactTable>
             </Box>
 
             <Box margin="small" gap="medium" basis={"auto"} direction="row-responsive" justify="center">
-                <Button color="status-warning" label={"Wait-List"}/>
-                <Button color="status-critical" label={"Reject"}/>
-                <Button color="status-ok" label={"Approve"}/>
+                <Button primary color="status-critical" label={"Reject"}/>
+                <Button primary color="status-warning" label={"Wait-List"}/>
+                <Button primary color="status-ok" label={"Approve"}/>
             </Box>
         </Box>
     )
