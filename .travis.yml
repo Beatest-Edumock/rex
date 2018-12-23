@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- '8'
+install:
+- npm install
+script:
+- npm run build
+env:
+  matrix:
+  - CI=false
+deploy:
+  provider: s3
+  access_key_id: AKIAIBQFCKUVKSLCBVVA
+  secret_access_key:
+    secure: EBU69cYJket3+ygSrytzofgLcMsgOpTd0K9V/ToEC2J8XfgLRlkAGfHcOFTsny/5JyBiE0MBxV0ANxTjNHOLErvspgWtLULWagzZSB2rmHsAjO58eQ9EZkPCXzI45yAOir485b2l4pD9sJC7E4b7DMPS0QEzkCCYqhX0VQU3D/u6VxzgPCvvW47+OYkxn5Mp8eG4wcHeFS8IcraEVim02Keg/n2PRkfUJpH038mpLkjAFqPg+INq/4E6ZQNC/fp35S2fUahnQtFeRL1XdxtzuYKvpg9e4OTe8eupZymZM2N04dQiwW0ChcYld9lk+b9m5bOkpHHph4TmMdXGXrl4gMAdNb9QW6pvCKx1oc8vsN3BLxsdVPnq3dXg38aUYs4lCwVTb2AirlhGusTZCyYEnMXOYod756ys/77b1magnsWVF6iCsGhUMriD4l+SbbGlItrT847NRZ2Hf5yTurliNtv3I4YUi7Qowl2++Ckz/awb6g/1VzrqBnzaI6ayBUAYUiM/ZJlHkels/kzg7Pe7ojuAPFWFmqNPZjxxkX27eg4HzYj+0h+dvLj22PgaSkUbTDTONkdiyzMe0bey/DOI4dfKu7QE1TN2bvFPdC19ieNKJXb7UXVLMIpeHCh6jToB5VqY6Nv8FP/uWHzN2n2NlsXFURT532zHVoErp96v86Y=
+  bucket: beatest-rex-staging
+  local-dir: build
+  acl: public_read
+  skip_cleanup: true
+  on:
+    repo: Beatest-Edumock/rex
