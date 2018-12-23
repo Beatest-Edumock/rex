@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "formik": "^1.4.1",
     "grommet": "^2.0.1",
+    "grommet-controls": "^0.90.9",
     "grommet-icons": "^3.2.1",
+    "history": "^4.7.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "styled-components": "^4.1.2"
+    "react-spinkit": "^3.0.0",
+    "react-spinners": "^0.4.7",
+    "redux": "^4.0.1",
+    "styled-components": "^4.1.2",
+    "yup": "^0.26.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,5 +33,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-redux": "^6.0.0",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-thunk": "^2.3.0"
+  }
 }

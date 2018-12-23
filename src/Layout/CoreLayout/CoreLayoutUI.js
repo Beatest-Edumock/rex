@@ -3,8 +3,10 @@ import React, {Component} from 'react';
 import {ContactInfo, Cursor, Menu as Hamburger, Servers as ServersIcon, User} from 'grommet-icons';
 import {Box, Button, Collapsible, Heading, Menu, MenuButton, RoutedButton, Text} from 'grommet';
 import {AppBar} from "../../Common/AppBar";
+import {logoutUserApi} from "../../_Api/User";
 
 import {withRouter} from "react-router-dom";
+import {LoadingSpinner} from "../../Common/LoadingSpinner";
 
 
 /**
@@ -22,17 +24,24 @@ class CoreLayoutWithRouter extends Component {
     };
 
     render() {
+        console.log(this.props.user);
 
-        console.log(this.props.location.pathname);
         const {showSidebar} = this.state;
 
+        if (this.props.user === 'loading') {
+            return (<LoadingSpinner/>);
+        }
+
         return (
+
+
             <Box fill animation={"fadeIn"}>
                 {this.context.router}
 
+
                 <AppBar>
 
-                    <Box justify="left" >
+                    <Box justify="left">
 
                         <Button
                             alignSelf="start"
@@ -41,9 +50,8 @@ class CoreLayoutWithRouter extends Component {
                         />
                     </Box>
 
-                    {/*This can be refactored to connect to redux store later*/}
                     <Box margin={{horizontal: "medium"}}>
-                        <Heading level='2' margin='none'>Syntel, Inc.</Heading>
+                        <Heading level='3' margin='none' color={'neutral-1'}>{this.props.user.corporate.name}</Heading>
                     </Box>
 
 
@@ -52,13 +60,19 @@ class CoreLayoutWithRouter extends Component {
 
                     {/*This can be refactored to connect to redux store later*/}
                     <Menu
-                        label="Harshvardhan Gupta"
+                        label={this.props.user.full_name}
                         size="small"
                         icon={<User/>}
                         dropBackground="dark-1"
                         items={[
                             {
                                 label: "Logout", onClick: () => {
+
+                                    logoutUserApi().then(() => {
+                                        this.props.history.push("/");
+                                        this.props.addUserAction(null);
+
+                                    })
                                 }
                             }
                         ]}
@@ -138,4 +152,4 @@ class CoreLayoutWithRouter extends Component {
     }
 }
 
-export const CoreLayout = withRouter(CoreLayoutWithRouter);
+export const CoreLayoutUI = withRouter(CoreLayoutWithRouter);

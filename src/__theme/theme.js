@@ -3,7 +3,7 @@ import {css} from 'styled-components';
 const theme = {
     global: {
         colors: {
-            brand:'#2d9ee0',
+            brand: '#2d9ee0',
             // background: '#ffffff'
         },
         font: {
@@ -12,16 +12,22 @@ const theme = {
     },
     anchor: {
         color: {
-            dark: '#FD6FFF',
-            light: '#9060EB'
+            dark: 'dark-5',
+            light: 'dark-6'
+        }
+    },
+    layer: {
+        background:"none",
+        overlay: {
+            background: "rgba(0, 0, 0, 0.5)"
         }
     },
     button: {
         extend: css(["", ";"], function (props) {
-            return !props.plain && 'font-weight: bold;';
+            return !props.plain && 'font-weight: lighter;';
         }),
-        border:{
-            radius: "0px"
+        border: {
+            radius: "5px"
         }
     }
 };
