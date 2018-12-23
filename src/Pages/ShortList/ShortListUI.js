@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, DataTable, MenuButton} from 'grommet';
+import {Box, DataTable, MenuButton, Button, Text} from 'grommet';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
@@ -51,36 +51,64 @@ const columns = [
 const columnsDiff = [
     {
         Header: "#",
-        accessor: "id"
+        accessor: "id",
+        maxWidth: 80,
     },
     {
         Header: props => <Box>Name</Box>,
-        accessor: "name"
+        accessor: "name",
     },
     {
-        Header: "Section 1 score",
-        accessor: "section_1_score",
-        Cell: props => <Box basis="full" fill pad={{horizontal: "small"}} background={props.value < 15 ? "status-critical" : "status-ok"}> {props.value}</Box>
-    },
-    {
-        Header: "Section 2 score",
-        accessor: "section_2_score",
-        Cell: props => <Box basis="full" fill pad={{horizontal: "small"}} background={props.value < 15 ? "status-critical" : "status-ok"}> {props.value}</Box>
+        Header: "Section Cutoffs",
+        columns: [
+
+            {
+                Header: "1",
+                Footer: "Count",
+                accessor: "section_1_score",
+                maxWidth: 70,
+                Cell: props => <Box round="xsmall" basis="full" fill pad={{horizontal: "small"}}
+                                    background={props.value < 15 ? "status-critical" : "status-ok"}>
+                    <Text textAlign="end">{props.value}</Text></Box>
+            },
+            {
+                Header: "2",
+                accessor: "section_2_score",
+                maxWidth: 70,
+                Cell: props => <Box round="xsmall" basis="full" fill pad={{horizontal: "small"}}
+                                    background={props.value < 15 ? "status-critical" : "status-ok"}>
+                    <Text textAlign="end"> {props.value}</Text>
+                </Box>
+            },
+
+
+        ]
     },
     {
         Header: "Total Score",
         accessor: "total_score",
-        Cell: props => <Box basis="full" fill pad={{horizontal: "small"}} background={props.value < 0 ? "status-critical" : "status-ok"}> {props.value}</Box>
+        maxWidth: 70,
+        Cell: props => <Box round="xsmall" basis="1/2" fill pad={{horizontal: "small"}} background={props.value < 0 ? "status-critical" : "status-ok"}>
+            <Text textAlign="end"> {props.value}</Text>
+        </Box>
     }
 ];
 
 function ShortListUI() {
     return (
 
-        <Box margin="small">
+        <Box fill>
+            <Box height={"90%"}>
 
-            <ReactTable filterable={true} data={arr} columns={columnsDiff}>
-            </ReactTable>
+                <ReactTable filterable={true} data={arr} columns={columnsDiff}>
+                </ReactTable>
+            </Box>
+
+            <Box margin="small" gap="medium" basis={"auto"} direction="row-responsive" justify="center">
+                <Button color="status-warning" label={"Wait-List"}/>
+                <Button color="status-critical" label={"Reject"}/>
+                <Button color="status-ok" label={"Approve"}/>
+            </Box>
         </Box>
     )
 }
