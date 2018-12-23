@@ -93,7 +93,7 @@ class CoreLayoutWithRouter extends Component {
                              width="xsmall">
 
                             {/*Below are the different core areas that the user can navigate to*/}
-                            <RoutedButton active={"/shortlist" === this.props.location.pathname} path="/shortlist" hoverIndicator>
+                            <RoutedButton id="shortlist-menu-btn" active={"/shortlist" === this.props.location.pathname} path="/shortlist" hoverIndicator>
                                 <Box
                                     pad={{vertical: "small"}}
                                     gap="xsmall"
@@ -106,7 +106,7 @@ class CoreLayoutWithRouter extends Component {
                             </RoutedButton>
 
 
-                            <RoutedButton active={"/profile-analysis" === this.props.location.pathname} path="/profile-analysis" hoverIndicator>
+                            <RoutedButton id="analysis-menu-btn" active={"/profile-analysis" === this.props.location.pathname} path="/profile-analysis" hoverIndicator>
                                 <Box
                                     pad={{vertical: "small"}}
                                     gap="xsmall"
@@ -130,7 +130,7 @@ class CoreLayoutWithRouter extends Component {
                                 align="stretch"
                                 margin='none'
                             >
-                                <RoutedButton active={"/demo" === this.props.location.pathname} path="/demo" hoverIndicator>
+                                <RoutedButton id="demo-menu-btn" active={"/demo" === this.props.location.pathname} path="/demo" hoverIndicator>
                                     <Box
                                         pad={{vertical: "small"}}
                                         gap="xsmall"
