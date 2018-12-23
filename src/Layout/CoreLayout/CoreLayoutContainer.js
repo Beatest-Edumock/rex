@@ -33,8 +33,10 @@ class CoreLayout extends Component {
 
         if (this.props.user == null || this.props.user === "loading") {
             this.props.history.push("/");
+            return <div></div>
         }
 
+        console.log("core layout was asked to render");
         return (
             <CoreLayoutUI user={this.props.user} addUserAction={this.props.addUserAction}>
                 {this.props.children}
