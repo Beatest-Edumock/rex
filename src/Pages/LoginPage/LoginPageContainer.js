@@ -27,8 +27,16 @@ class LoginPage extends React.Component {
 
         loginUserApi(values.email, values.password).then(({data}) => {
 
-            this.props.addUserAction(data);
-            this.props.history.push("/shortlist");
+
+            if (data.corporate == null) {
+                setErrors({info: "You are not a corporate User"})
+            }
+            else {
+                this.props.addUserAction(data);
+                this.props.history.push("/shortlist");
+
+            }
+
 
         }).catch(({response}) => {
             setErrors({info: response.data.message});
