@@ -7,6 +7,13 @@ import {connect} from 'react-redux';
 
 class CoreLayout extends Component {
 
+    constructor(props) {
+        super(props);
+        if (this.props.user == null || this.props.user === "loading") {
+            this.props.history.push("/");
+        }
+    }
+
     shouldComponentUpdate() {
 
         console.log(this.props.user);
