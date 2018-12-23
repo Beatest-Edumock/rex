@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
     componentDidUpdate() {
 
         if (this.props.user !== null && this.props.user !== "loading")
-            this.props.history.push("/get-started");
+            this.props.history.push("/shortlist");
 
         return true;
     }
