@@ -11,11 +11,13 @@ const steps = [
         isFixed: true
     },
     {
+        disableBeacon: true,
         target: '#analysis-menu-btn',
         content: 'Detailed analysis on one applicant',
         placement: 'auto',
     },
     {
+        disableBeacon: true,
         target: '#demo-menu-btn',
         content: 'Take a few demo exams',
         placement: 'top',
@@ -38,6 +40,7 @@ function GetStartedUI() {
                 continuous={true}
                 disableOverlayClose={true}
                 spotlightClicks={true}
+                showProgress={true}
                 run={true}
             />
         </React.Fragment>

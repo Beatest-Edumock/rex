@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {ContactInfo, Cursor, Menu as Hamburger, Servers as ServersIcon, User} from 'grommet-icons';
+import {ContactInfo, Cursor, Menu as Hamburger, Servers as ServersIcon, Info as InfoIcon, User} from 'grommet-icons';
 import {Box, Button, Collapsible, Heading, Menu, MenuButton, RoutedButton, Text} from 'grommet';
 import {AppBar} from "../../Common/AppBar";
 import {logoutUserApi} from "../../_Api/User";
@@ -93,6 +93,18 @@ class CoreLayoutWithRouter extends Component {
                              width="xsmall">
 
                             {/*Below are the different core areas that the user can navigate to*/}
+                            <RoutedButton active={"/get-started" === this.props.location.pathname} path="/get-started" hoverIndicator>
+                                <Box
+                                    pad={{vertical: "small"}}
+                                    gap="xsmall"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <InfoIcon size="medium"/>
+                                    <Text size="xsmall" alignSelf="center" textAlign={"center"}>Tutorial</Text>
+                                </Box>
+                            </RoutedButton>
+
                             <RoutedButton id="shortlist-menu-btn" active={"/shortlist" === this.props.location.pathname} path="/shortlist" hoverIndicator>
                                 <Box
                                     pad={{vertical: "small"}}
