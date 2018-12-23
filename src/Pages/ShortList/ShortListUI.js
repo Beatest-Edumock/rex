@@ -12,13 +12,18 @@ const arr = Array(2000);
 
 
 for (let i = 0; i < arr.length; i++) {
+
+    const section_1_score = chance.integer({min: -10, max: 50});
+    const section_2_score = chance.integer({min: -10, max: 50});
+    const section_3_score = chance.integer({min: -10, max: 50});
+
     arr[i] = {
         name: chance.name(),
         id: i + 1,
-        section_1_score: chance.integer({min: -10, max: 50}),
-        section_2_score: chance.integer({min: -20, max: 30}),
-        section_3_score: chance.integer({min: -10, max: 50}),
-        total_score: chance.integer({min: -10, max: 30})
+        section_1_score: section_1_score,
+        section_2_score: section_2_score,
+        section_3_score: section_3_score,
+        total_score: section_1_score + section_2_score + section_3_score
 
 
     }
@@ -80,6 +85,20 @@ const columnsDiff = [
             {
                 Header: "2",
                 accessor: "section_2_score",
+                resizable: false,
+                maxWidth: 45,
+                Cell: props => <Box round="xsmall"
+                                    basis="full"
+                                    align="center"
+                                    justify="center"
+                                    pad={{horizontal: "small", vertical: "xsmall"}}
+                                    background={props.value < 0 ? "status-critical" : "status-ok"}>
+                    <Text textAlign="center" size="xsmall"> {props.value}</Text>
+                </Box>
+            },
+            {
+                Header: "3",
+                accessor: "section_3_score",
                 resizable: false,
                 maxWidth: 45,
                 Cell: props => <Box round="xsmall"

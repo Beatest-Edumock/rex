@@ -51,7 +51,7 @@ class CoreLayoutWithRouter extends Component {
                     </Box>
 
                     <Box margin={{horizontal: "medium"}}>
-                        <Heading level='3' margin='none' color={'neutral-1'}>{this.props.user.corporate.name}</Heading>
+                        <Heading level='3' margin='none' color={'light-1'}>{this.props.user.corporate.name}</Heading>
                     </Box>
 
 
