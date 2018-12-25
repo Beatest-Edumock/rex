@@ -13,6 +13,15 @@ class ShortListModalUI extends React.Component {
     render() {
         const {options, selected, value} = this.state;
 
+
+        const sortedDates = this.props.testDates.sort((a, b) => {
+
+            return new Date(b) - new Date(a);
+        });
+
+        const bounds = [sortedDates[sortedDates.length - 1], sortedDates[0]];
+
+
         return (
             <Layer position='center' onClickOutside={() => {
                 this.props.onClickOutside()
@@ -73,6 +82,8 @@ class ShortListModalUI extends React.Component {
                             >
                                 <Calendar
                                     dates={this.props.testDates}
+                                    bounds={bounds}
+
                                     animate={false}
 
                                     onSelect={(date) => {

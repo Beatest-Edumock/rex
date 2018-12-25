@@ -151,7 +151,7 @@ class CoreLayoutWithRouter extends Component {
                                         justify="center"
                                     >
                                         <Cursor size="medium"/>
-                                        <Text size="xsmall" alignSelf="center" textAlign={"center"}>Demo</Text>
+                                        <Text size="xsmall" alignSelf="center" textAlign={"center"}>Trial</Text>
                                     </Box>
                                 </RoutedButton>
                             </Box>
