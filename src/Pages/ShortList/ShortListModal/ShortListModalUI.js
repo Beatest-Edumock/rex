@@ -82,7 +82,6 @@ class ShortListModalUI extends React.Component {
                             >
                                 <Calendar
                                     dates={this.props.testDates}
-                                    bounds={bounds}
 
                                     animate={false}
 

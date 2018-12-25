@@ -87,8 +87,6 @@ class ShortList extends React.Component {
         ];
         const columnsModified = columns.slice();
 
-        console.log(this.props.testAttemptsOverview.length);
-
         if (this.props.testAttemptsOverview.length > 0) {
             for (let i = 0; i < this.props.testAttemptsOverview[0].section_attempts.length; i++) {
                 columnsModified[2].columns.push({
