@@ -2,6 +2,7 @@ import React from 'react';
 import {Box, DataTable, MenuButton, Button, Text} from 'grommet';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
+import {ShortListModal} from "./ShortListModal";
 
 // let Chance = require('chance');
 //
@@ -32,7 +33,7 @@ import 'react-table/react-table.css'
 
 class ShortListUI extends React.Component {
 
-    state = {data: []};
+    state = {data: [], isModalOpen: true};
 
     constructor(props) {
         super(props);
@@ -44,6 +45,19 @@ class ShortListUI extends React.Component {
     render() {
         return (
             <Box fill>
+                {this.state.isModalOpen &&
+                <ShortListModal
+                    onClickOutside={() => {
+                        this.setState(
+                            {
+                                ...this.state,
+                                isModalOpen: false
+                            }
+                        )
+                    }}/>
+                }
+
+
                 <Box height={"90%"} margin={'small'}>
                     <ReactTable
                         className="-highlight -striped"

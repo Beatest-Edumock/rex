@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 
 import {ContactInfo, Cursor, Menu as Hamburger, Servers as ServersIcon, Info as InfoIcon, User} from 'grommet-icons';
-import {Box, Button, Collapsible, Heading, Menu, MenuButton, RoutedButton, Text} from 'grommet';
+import {Box, Button, Collapsible, Heading, Layer, Menu, MenuButton, RoutedButton, Text} from 'grommet';
 import {AppBar} from "../../Common/AppBar";
 import {logoutUserApi} from "../../_Api/User";
 
 import {withRouter} from "react-router-dom";
 import {LoadingSpinner} from "../../Common/LoadingSpinner";
+import {RingLoader} from "react-spinners";
+import {ShortList} from "../../Pages/ShortList";
 
 
 /**
@@ -24,7 +26,6 @@ class CoreLayoutWithRouter extends Component {
     };
 
     render() {
-        console.log(this.props.user);
 
         const {showSidebar} = this.state;
 

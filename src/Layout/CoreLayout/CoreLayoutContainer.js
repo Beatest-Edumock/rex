@@ -16,7 +16,6 @@ class CoreLayout extends Component {
 
     shouldComponentUpdate() {
 
-        console.log(this.props.user);
 
         if (this.props.user == null || this.props.user === "loading") {
             this.props.history.push("/");
@@ -29,16 +28,17 @@ class CoreLayout extends Component {
     }
 
     render() {
-        console.log(this.props.children);
 
         if (this.props.user == null || this.props.user === "loading") {
             this.props.history.push("/");
             return <div></div>
         }
 
-        console.log("core layout was asked to render");
         return (
-            <CoreLayoutUI user={this.props.user} addUserAction={this.props.addUserAction}>
+            <CoreLayoutUI user={this.props.user}
+                          addUserAction={this.props.addUserAction}
+                          shouldShortListModalOpen={false}
+            >
                 {this.props.children}
             </CoreLayoutUI>
         )
