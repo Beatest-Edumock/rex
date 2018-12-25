@@ -11,8 +11,8 @@ import {addUserAC} from './ActionCreators/User-ActionCreator'
 
 import userReducer from './reducers/User/User-Reducers'
 import {getUserDetailsApi} from "../_Api/User";
-import {testReducer} from "./reducers/Tests/Reducer-Entry";
 import React from 'react';
+import {testAttemptsReducer} from "./reducers/Tests/TestAttempts-Reducers";
 
 
 function initStore() {
@@ -21,7 +21,7 @@ function initStore() {
     const combined = combineReducers(
         {
             user: userReducer,
-            test: testReducer
+            testAttemptsOverview: testAttemptsReducer
         }
     );
 
@@ -41,7 +41,6 @@ function initStore() {
 
 
     const store = createStore(combined, middleware);
-
 
 
     getUserDetailsApi().then(({data}) => {

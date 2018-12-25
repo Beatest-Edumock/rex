@@ -1,6 +1,6 @@
-import {ShortListUI} from "./ShortListUI";
+import {ShortListContainer} from "./ShortListContainer";
 
-const ShortList = ShortListUI;
+const ShortList = ShortListContainer;
 
 export {ShortList};
 // export const ShortList = ShortListUI;
