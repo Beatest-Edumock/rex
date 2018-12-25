@@ -68,6 +68,7 @@ class ShortListUI extends React.Component {
                         <ReactTable
                             className="-highlight -striped"
                             loading={this.props.data.length < 1}
+
                             getTdProps={(state, rowInfo, column, instance) => {
                                 return {
                                     onClick: (e, handleOriginal) => {

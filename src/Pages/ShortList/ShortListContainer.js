@@ -66,6 +66,10 @@ class ShortList extends React.Component {
                 id: 'name',
                 Header: props => <Box>Name</Box>,
                 accessor: d => d.user.full_name,
+                filterMethod: (filter, row) => {
+                    return row[filter.id].toLowerCase().includes(filter.value.toLowerCase());
+
+                },
             },
             {
                 Header: props => <Text size={"xsmall"}>Section <br/> Cutoffs</Text>,
@@ -74,6 +78,10 @@ class ShortList extends React.Component {
             {
                 Header: props => <Text size={"xsmall"}>Total <br/> Score</Text>,
                 accessor: "score",
+                filterMethod: (filter, row) => {
+                    return row[filter.id] >= filter.value;
+
+                },
                 maxWidth: 45,
                 Cell: props => <Box round="xsmall"
                                     basis="full"
@@ -98,7 +106,10 @@ class ShortList extends React.Component {
                     },
                     resizable: false,
                     maxWidth: 45,
+                    filterMethod: (filter, row) => {
+                        return row[filter.id] >= filter.value;
 
+                    },
                     Cell: props => <Box round="xsmall"
                                         basis="full"
                                         align="center"
