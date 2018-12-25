@@ -1,7 +1,8 @@
 import React from 'react'
 import {ShortListModalUI} from "./ShortListModalUI";
 import {connect} from 'react-redux';
-import {getTestAttemptDatesAPI} from "../../../_Api/Tests/TestAttempts/TestAttempts";
+import {getTestAttemptDatesAPI, getTestAttemptsOverviewAPI} from "../../../_Api/Tests/TestAttempts/TestAttempts";
+import {pushTestAttempts} from "../../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 
 
 class ShortListModal extends React.Component {
@@ -15,6 +16,18 @@ class ShortListModal extends React.Component {
     constructor() {
         super();
         this.onTestSelectCallback = this.onTestSelectCallback.bind(this);
+        this.onDateSelectCallback = this.onDateSelectCallback.bind(this);
+    }
+
+    onDateSelectCallback(selectedDate) {
+
+        getTestAttemptsOverviewAPI(this.props.user.corporate.tests[this.state.selectedTestIdx].id).then(({data}) => {
+            this.props.addTestAttemptsOverview(data);
+
+        });
+
+
+
     }
 
     /**
@@ -43,11 +56,14 @@ class ShortListModal extends React.Component {
         return (
             <ShortListModalUI
                 onClickOutside={this.props.onClickOutside}
+
                 corporateTests={this.props.user.corporate.tests.map((elem) => {
                     return elem.name
                 })}
                 testDates={this.state.testDates.map((el) => el.date)}
-                onSelectCallback={this.onTestSelectCallback}
+                onSelectCallback={this.onTestSelectCallback} // when a test is selected from dropdown
+
+                onDateSelectCallback={this.onDateSelectCallback}
             />
         )
     }
@@ -70,7 +86,12 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
 
-    return {}
+    return {
+
+        addTestAttemptsOverview: (data) => {
+            dispatch(pushTestAttempts(data));
+        }
+    }
 
 }
 

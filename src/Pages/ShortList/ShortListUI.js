@@ -33,7 +33,7 @@ import {ShortListModal} from "./ShortListModal";
 
 class ShortListUI extends React.Component {
 
-    state = {data: [], isModalOpen: true};
+    state = {isModalOpen: true};
 
     constructor(props) {
         super(props);
@@ -43,6 +43,11 @@ class ShortListUI extends React.Component {
 
 
     render() {
+
+
+        console.log("here");
+        console.log(this.props.column_format);
+
         return (
             <Box fill>
                 {this.state.isModalOpen &&
@@ -82,7 +87,6 @@ class ShortListUI extends React.Component {
                             };
                         }
                         }
-
 
                         filterable={true}
                         data={this.props.data}

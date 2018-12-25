@@ -74,7 +74,27 @@ class ShortListModalUI extends React.Component {
                                 <Calendar
                                     dates={this.props.testDates}
                                     animate={false}
-                                    onSelect={() => {
+
+                                    onSelect={(date) => {
+
+
+                                        const result = this.props.testDates.find((elem) => {
+                                            elem = new Date(elem);
+                                            elem.setHours(0, 0, 0, 0);
+
+                                            const selectedDate = new Date(date);
+                                            selectedDate.setHours(0, 0, 0, 0);
+
+                                            return selectedDate.getTime() === elem.getTime();
+
+
+                                        });
+                                        if (result) {
+                                            this.props.onDateSelectCallback(date);
+                                            this.props.onClickOutside();
+                                        }
+
+
                                     }}
                                 />
                             </Box>
