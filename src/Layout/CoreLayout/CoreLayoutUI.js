@@ -45,6 +45,7 @@ class CoreLayoutWithRouter extends Component {
                     <Box justify="left">
 
                         <Button
+                            id={"hamburger-btn"}
                             alignSelf="start"
                             icon={<Hamburger color='light-1'/>}
                             onClick={() => this.setState({showSidebar: !this.state.showSidebar})}

@@ -87,6 +87,9 @@ class ShortListModalUI extends React.Component {
 
                                     onSelect={(date) => {
 
+                                        // date.setHours(0, 0, 0, 0);
+                                        console.log(new Date(date).setHours(0, 0, 0, 0));
+
 
                                         const result = this.props.testDates.find((elem) => {
                                             elem = new Date(elem);
@@ -97,10 +100,12 @@ class ShortListModalUI extends React.Component {
 
                                             return selectedDate.getTime() === elem.getTime();
 
-
                                         });
                                         if (result) {
-                                            this.props.onDateSelectCallback(date);
+                                            date = new Date(date);
+                                            date.setHours(0, 0, 0, 0);
+
+                                            this.props.onDateSelectCallback(date.toISOString());
                                             this.props.onClickOutside();
                                         }
 

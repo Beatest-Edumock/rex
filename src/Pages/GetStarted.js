@@ -22,6 +22,12 @@ const steps = [
         content: 'Take a few demo exams',
         placement: 'top',
     },
+    {
+        disableBeacon: true,
+        target: '#hamburger-btn',
+        content: 'Click here to toggle the sidebar',
+        placement: 'auto',
+    },
 ];
 
 function GetStartedUI() {
@@ -36,7 +42,6 @@ function GetStartedUI() {
 
             <Joyride
                 steps={steps}
-
                 continuous={true}
                 disableOverlayClose={true}
                 spotlightClicks={true}

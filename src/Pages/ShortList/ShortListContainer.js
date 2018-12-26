@@ -13,55 +13,17 @@ class ShortList extends React.Component {
 
 
         super();
-        // getTestAttemptsOverviewAPI(105).then(({data}) => {
-        //     this.props.addTestAttemptsOverview(data);
-        //
-        //     const columnsmodified = columns.slice();
-        //
-        //
-        //     for (let i = 0; i < data[0].section_attempts.length; i++) {
-        //         columnsmodified[2].columns.push({
-        //
-        //
-        //             header: `${i + 1}`,
-        //             id: `${i + 1}`,
-        //             accessor: d => d.section_attempts[i].score,
-        //             resizable: false,
-        //             maxwidth: 45,
-        //             cell: props => <box round="xsmall"
-        //                                 basis="full"
-        //                                 align="center"
-        //                                 justify="center"
-        //                                 pad={{horizontal: "small", vertical: "xsmall"}}
-        //                                 background={props.value < 0 ? "status-critical" : "status-ok"}>
-        //                 <text textalign="center" size="xsmall"> {props.value}</text>
-        //
-        //             </box>
-        //
-        //
-        //         })
-        //
-        //
-        //     }
-        //
-        //
-        //     this.setState({
-        //         tableData: data,
-        //         column_format: columnsModified
-        //     })
-        //
-        // });
 
     }
 
 
     render() {
         const columns = [
-            {
-                Header: "#",
-                accessor: "id",
-                maxWidth: 80,
-            },
+            // {
+            //     Header: "#",
+            //     accessor: "id",
+            //     maxWidth: 80,
+            // },
             {
                 id: 'name',
                 Header: props => <Box>Name</Box>,
@@ -97,7 +59,7 @@ class ShortList extends React.Component {
 
         if (this.props.testAttemptsOverview.length > 0) {
             for (let i = 0; i < this.props.testAttemptsOverview[0].section_attempts.length; i++) {
-                columnsModified[2].columns.push({
+                columnsModified[1].columns.push({
 
                     Header: `${i + 1}`,
                     id: `$section_${i + 1}`,

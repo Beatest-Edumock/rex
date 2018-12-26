@@ -30,7 +30,7 @@ class TrialPageUI extends React.Component {
                                     align="center"
                                     justify="center"
                                     background={{color: "light-2", opacity: "strong"}}
-                                    round
+                                    round={"xsmall"}
                                     gap="small">
 
                                     <Text>{el.name}</Text>
