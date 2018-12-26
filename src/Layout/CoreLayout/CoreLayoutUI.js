@@ -143,7 +143,7 @@ class CoreLayoutWithRouter extends Component {
                                 align="stretch"
                                 margin='none'
                             >
-                                <RoutedButton id="demo-menu-btn" active={"/demo" === this.props.location.pathname} path="/demo" hoverIndicator>
+                                <RoutedButton id="demo-menu-btn" active={"/trial" === this.props.location.pathname} path="/trial" hoverIndicator>
                                     <Box
                                         pad={{vertical: "small"}}
                                         gap="xsmall"

@@ -100,7 +100,7 @@ class ShortList extends React.Component {
                 columnsModified[2].columns.push({
 
                     Header: `${i + 1}`,
-                    id: `${i + 1}`,
+                    id: `$section_${i + 1}`,
                     accessor: d => {
                         return d.section_attempts[i].score
                     },

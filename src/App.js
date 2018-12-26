@@ -12,6 +12,7 @@ import {Provider} from 'react-redux'
 import {ShortList} from "./Pages/ShortList";
 import {CoreLayout} from "./Layout/CoreLayout";
 import {GetStartedUI} from "./Pages/GetStarted";
+import {TrialPage} from "./Pages/TrialPage";
 
 
 setUpApp();
@@ -35,6 +36,7 @@ function CoreLayoutWrapper() {
                     <Route path="/get-started" exact component={GetStartedUI}/>
                     <Route path="/shortlist" exact component={ShortList}/>
                     <Route path="/profile-analysis" exact component={ProfileAnalysis}/>
+                    <Route path="/trial" exact component={TrialPage}/>
                 </Switch>
             </Box>
         </CoreLayout>
@@ -58,6 +60,7 @@ class App extends Component {
                             <Route path="/shortlist" exact component={CoreLayoutWrapper}/>
                             <Route path="/get-started" exact component={CoreLayoutWrapper}/>
                             <Route path="/profile-analysis" exact component={CoreLayoutWrapper}/>
+                            <Route path="/trial" exact component={CoreLayoutWrapper}/>
 
                             <Route component={NotFoundPage}/>
                         </Switch>
