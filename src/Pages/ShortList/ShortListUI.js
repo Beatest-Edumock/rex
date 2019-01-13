@@ -73,7 +73,7 @@ class ShortListUI extends React.Component {
                 <Box margin="small" gap="medium" fill={"horizontal"} direction="row-responsive" justify="center">
 
                     <Box align="start" basis="1/3">
-                        <Button align="start" alignSelf={"start"} label={"Change Test/Date"} onClick={() => {
+                        <Button align="start" alignSelf={"start"} label={"Change Test"} onClick={() => {
                             this.setState({
                                 ...this.state,
                                 isModalOpen: true

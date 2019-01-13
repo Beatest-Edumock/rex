@@ -60,6 +60,7 @@ class ShortListModalUI extends React.Component {
                                         });
 
                                         this.props.onSelectCallback(event.selected);
+                                        this.props.onClickOutside();
                                     }
                                     }
 
@@ -68,53 +69,67 @@ class ShortListModalUI extends React.Component {
                             />
                         </Box>
 
-                        <Box
-                            alignSelf="center"
-                        >
-                            <Heading
-                                textAlign="center"
-                                color="dark-4"
-                                level={3}>
-                                Select Exam Date</Heading>
-                            <Box border="small"
-                                 round="small"
-                                 pad="small"
-                            >
-                                <Calendar
-                                    dates={this.props.testDates}
-
-                                    animate={false}
-
-                                    onSelect={(date) => {
-
-                                        // date.setHours(0, 0, 0, 0);
-                                        console.log(new Date(date).setHours(0, 0, 0, 0));
 
 
-                                        const result = this.props.testDates.find((elem) => {
-                                            elem = new Date(elem);
-                                            elem.setHours(0, 0, 0, 0);
 
-                                            const selectedDate = new Date(date);
-                                            selectedDate.setHours(0, 0, 0, 0);
+                        {/*The commented lines below are responsible for date selection.*/}
 
-                                            return selectedDate.getTime() === elem.getTime();
-
-                                        });
-                                        if (result) {
-                                            date = new Date(date);
-                                            date.setHours(0, 0, 0, 0);
-
-                                            this.props.onDateSelectCallback(date.toISOString());
-                                            this.props.onClickOutside();
-                                        }
+                        {/*<Box*/}
+                            {/*alignSelf="center"*/}
+                        {/*>*/}
+                            {/*<Heading*/}
+                                {/*textAlign="center"*/}
+                                {/*color="dark-4"*/}
+                                {/*level={3}>*/}
+                                {/*Select Exam Date</Heading>*/}
 
 
-                                    }}
-                                />
-                            </Box>
 
-                        </Box>
+
+
+
+                            {/*<Box border="small"*/}
+                                 {/*round="small"*/}
+                                 {/*pad="small"*/}
+                            {/*>*/}
+                                {/*Calendar is disabled for the time being*/}
+
+
+                                {/*<Calendar*/}
+                                    {/*dates={this.props.testDates}*/}
+
+                                    {/*animate={false}*/}
+
+                                    {/*onSelect={(date) => {*/}
+
+                                        {/*// date.setHours(0, 0, 0, 0);*/}
+                                        {/*console.log(new Date(date).setHours(0, 0, 0, 0));*/}
+
+
+                                        {/*const result = this.props.testDates.find((elem) => {*/}
+                                            {/*elem = new Date(elem);*/}
+                                            {/*elem.setHours(0, 0, 0, 0);*/}
+
+                                            {/*const selectedDate = new Date(date);*/}
+                                            {/*selectedDate.setHours(0, 0, 0, 0);*/}
+
+                                            {/*return selectedDate.getTime() === elem.getTime();*/}
+
+                                        {/*});*/}
+                                        {/*if (result) {*/}
+                                            {/*date = new Date(date);*/}
+                                            {/*date.setHours(0, 0, 0, 0);*/}
+
+                                            {/*this.props.onDateSelectCallback(date.toISOString());*/}
+                                            {/*this.props.onClickOutside();*/}
+                                        {/*}*/}
+
+
+                                    {/*}}*/}
+                                {/*/>*/}
+                            {/*</Box>*/}
+
+                        {/*</Box>*/}
 
                     </Box>
                 </Box>

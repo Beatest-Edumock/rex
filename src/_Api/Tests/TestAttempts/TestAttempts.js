@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const getTestAttemptsOverviewAPI = (testID,date) => {
-    return axios.get(`/rex/test/${testID}/attempts/${date}`);
+export const getTestAttemptsOverviewAPI = (testID) => {
+    return axios.get(`/rex/test/${testID}/attempts`);
 };
 
 export const getTestAttemptDatesAPI = (testID) => {
