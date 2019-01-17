@@ -39,9 +39,11 @@ class ShortListUI extends React.Component {
 
                 <Box height={"90%"} margin={'small'}>
                     <Box>
+
+
                         <ReactTable
                             className="-highlight -striped"
-                            loading={this.props.data.length < 1}
+                            loading={this.props.data ==null}
                             onFetchData={(state, instance) => {
                                 console.log(state.filtered);
                             }
@@ -66,6 +68,17 @@ class ShortListUI extends React.Component {
                             filterable={true}
                             data={this.props.data}
                             columns={this.props.column_format}>
+
+                            {(state, makeTable, instance) => {
+                                // console.log(JSON.stringify(state));
+                                console.log(JSON.stringify(state.sortedData));
+                                return (
+
+                                    makeTable()
+                                );
+                            }}
+
+
                         </ReactTable>
                     </Box>
                 </Box>

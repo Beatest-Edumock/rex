@@ -120,17 +120,17 @@ class CoreLayoutWithRouter extends Component {
                             </RoutedButton>
 
 
-                            <RoutedButton id="analysis-menu-btn" active={"/profile-analysis" === this.props.location.pathname} path="/profile-analysis" hoverIndicator>
-                                <Box
-                                    pad={{vertical: "small"}}
-                                    gap="xsmall"
-                                    align="center"
-                                    justify="center"
-                                >
-                                    <ContactInfo size="medium"/>
-                                    <Text size="xsmall" alignSelf="center" textAlign={"center"}>Profile Analysis</Text>
-                                </Box>
-                            </RoutedButton>
+                            {/*<RoutedButton id="analysis-menu-btn" active={"/profile-analysis" === this.props.location.pathname} path="/profile-analysis" hoverIndicator>*/}
+                                {/*<Box*/}
+                                    {/*pad={{vertical: "small"}}*/}
+                                    {/*gap="xsmall"*/}
+                                    {/*align="center"*/}
+                                    {/*justify="center"*/}
+                                {/*>*/}
+                                    {/*<ContactInfo size="medium"/>*/}
+                                    {/*<Text size="xsmall" alignSelf="center" textAlign={"center"}>Profile Analysis</Text>*/}
+                                {/*</Box>*/}
+                            {/*</RoutedButton>*/}
 
 
                             {/*The "demo" page is pushed all the way to the bottom*/}
