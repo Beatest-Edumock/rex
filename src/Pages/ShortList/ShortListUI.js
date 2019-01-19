@@ -43,7 +43,7 @@ class ShortListUI extends React.Component {
                             className="-highlight -striped"
                             loading={this.props.data == null}
                             onFetchData={(state, instance) => {
-                                console.log(state.filtered);
+                                //console.log(state.filtered);
                             }
                             }
 
@@ -69,7 +69,7 @@ class ShortListUI extends React.Component {
 
                             {(state, makeTable, instance) => {
                                 // console.log(JSON.stringify(state));
-                                console.log(JSON.stringify(state.sortedData));
+                                //console.log(JSON.stringify(state.sortedData));
                                 return (
 
                                     makeTable()

@@ -3,6 +3,8 @@ import {ShortListUI} from "./ShortListUI";
 import {pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 import {connect} from 'react-redux'
 import {Box, Text} from "grommet";
+import {FilterBox} from "../../Common/FilterBox/FilterBox";
+import {SimpleResultProcessing} from "react-filter-box";
 
 
 class ShortList extends React.Component {
@@ -28,9 +30,10 @@ class ShortList extends React.Component {
                 Header: props => <Box>Name</Box>,
                 accessor: d => d.user.full_name,
                 filterMethod: (filter, row) => {
-                    return row[filter.id].toLowerCase().includes(filter.value.toLowerCase());
-
+                    return new CustomResultProcessing([{columField: "name", columnText: "Name", type: "text"}]).predicate(row, filter.value);
                 },
+                Filter: ({ filter, onChange }) =>
+                    <FilterBox options={[{columField: "name", columnText: "Name", type: "text"}]} onCondition={onChange}/>
             },
             {
                 Header: props => <Text size={"xsmall"}>Section <br/> Cutoffs</Text>,
@@ -41,7 +44,6 @@ class ShortList extends React.Component {
                 accessor: "score",
                 filterMethod: (filter, row) => {
                     return row[filter.id] >= filter.value;
-
                 },
                 maxWidth: 45,
                 Cell: props => <Box round="xsmall"
@@ -99,6 +101,23 @@ class ShortList extends React.Component {
         );
     }
 
+}
+
+class CustomResultProcessing extends SimpleResultProcessing {
+
+    // override this method
+    filter(row, fieldOrLabel, operator, value) {
+        let field = this.tryToGetFieldCategory(fieldOrLabel);
+
+        switch (operator) {
+            case "==": return row[field] == value;
+            case "!=": return row[field] != value;
+            case "contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) >= 0;
+            case "!contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) < 0;
+        }
+
+        return false;
+    }
 }
 
 function mapStateToProps(state, ownProps) {
