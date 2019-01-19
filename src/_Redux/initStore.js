@@ -20,8 +20,8 @@ function initStore() {
 
     const combined = combineReducers(
         {
-            user: userReducer,
-            testAttemptsOverview: testAttemptsReducer
+            user: userReducer, //user object,result of get user details api
+            testAttemptsOverview: testAttemptsReducer //an array of test attempt rows , result of get test attempt overview endpoint
         }
     );
 
