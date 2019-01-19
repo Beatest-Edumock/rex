@@ -95,6 +95,7 @@ class ShortList extends React.Component {
 
         return (
             <ShortListUI data={this.props.testOverview.test_attempts}
+                         isLoading={this.props.testOverview.name === undefined}
                          column_format={columnsModified.slice()}
 
             />

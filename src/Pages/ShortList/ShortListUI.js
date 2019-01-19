@@ -41,7 +41,7 @@ class ShortListUI extends React.Component {
 
                         <ReactTable
                             className="-highlight -striped"
-                            loading={this.props.data == null}
+                            loading={this.props.isLoading}
                             onFetchData={(state, instance) => {
                                 //console.log(state.filtered);
                             }

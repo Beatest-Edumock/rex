@@ -20,7 +20,6 @@ class ShortListModal extends React.Component {
     }
 
     onDateSelectCallback(selectedDate) {
-        this.props.addTestAttemptsOverview([]);
 
         getTestAttemptsOverviewAPI(this.props.user.corporate.tests[this.state.selectedTestIdx].id, selectedDate).then(({data}) => {
             this.props.addTestAttemptsOverview(data);
@@ -37,17 +36,14 @@ class ShortListModal extends React.Component {
      */
     onTestSelectCallback(selectedTestIdx) {
         this.setState({...this.state, selectedTestIdx});
+        this.props.addTestAttemptsOverview({test_attempts: []});
 
         const testId = this.props.user.corporate.tests[selectedTestIdx].id;
-
 
 
         getTestAttemptsOverviewAPI(testId).then(({data}) => {
             this.props.addTestAttemptsOverview(data);
         });
-
-
-
 
 
         //
