@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Heading, DataTable, MenuButton, Button, Text} from 'grommet';
+import {Box, Button, MenuButton} from 'grommet';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import {ShortListModal} from "./ShortListModal";
@@ -19,10 +19,8 @@ class ShortListUI extends React.Component {
     render() {
 
 
-        console.log("here");
-        console.log(this.props.column_format);
-
         return (
+
             <Box fill overflow="scroll">
                 {this.state.isModalOpen &&
                 <ShortListModal
@@ -43,7 +41,7 @@ class ShortListUI extends React.Component {
 
                         <ReactTable
                             className="-highlight -striped"
-                            loading={this.props.data ==null}
+                            loading={this.props.data == null}
                             onFetchData={(state, instance) => {
                                 console.log(state.filtered);
                             }

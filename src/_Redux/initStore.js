@@ -12,7 +12,7 @@ import {addUserAC} from './ActionCreators/User-ActionCreator'
 import userReducer from './reducers/User/User-Reducers'
 import {getUserDetailsApi} from "../_Api/User";
 import React from 'react';
-import {testAttemptsReducer} from "./reducers/Tests/TestAttempts-Reducers";
+import {testOverviewReducer} from "./reducers/Tests/TestAttempts-Reducers";
 
 
 function initStore() {
@@ -21,7 +21,7 @@ function initStore() {
     const combined = combineReducers(
         {
             user: userReducer, //user object,result of get user details api
-            testAttemptsOverview: testAttemptsReducer //an array of test attempt rows , result of get test attempt overview endpoint
+            testOverview: testOverviewReducer //an array of test attempt rows , result of get test attempt overview endpoint
         }
     );
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import {ShortListUI} from "./ShortListUI";
-import {getTestAttemptsOverviewAPI} from "../../_Api/Tests/TestAttempts/TestAttempts";
 import {pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 import {connect} from 'react-redux'
 import {Box, Text} from "grommet";
@@ -57,8 +56,8 @@ class ShortList extends React.Component {
         ];
         const columnsModified = columns.slice();
 
-        if (this.props.testAttemptsOverview.length > 0) {
-            for (let i = 0; i < this.props.testAttemptsOverview[0].section_attempts.length; i++) {
+        if (this.props.testOverview.test_attempts.length > 0) {
+            for (let i = 0; i < this.props.testOverview.test_attempts[0].section_attempts.length; i++) {
                 columnsModified[1].columns.push({
 
                     Header: `${i + 1}`,
@@ -67,7 +66,7 @@ class ShortList extends React.Component {
                         return d.section_attempts[i].score
                     },
                     resizable: false,
-                    maxWidth: 45,
+                    // maxWidth: 45,
                     filterMethod: (filter, row) => {
                         return row[filter.id] >= filter.value;
 
@@ -93,7 +92,7 @@ class ShortList extends React.Component {
 
 
         return (
-            <ShortListUI data={this.props.testAttemptsOverview}
+            <ShortListUI data={this.props.testOverview.test_attempts}
                          column_format={columnsModified.slice()}
 
             />
@@ -107,7 +106,7 @@ function mapStateToProps(state, ownProps) {
 
     return {
         ...ownProps,
-        testAttemptsOverview: state.testAttemptsOverview
+        testOverview: state.testOverview
 
     }
 

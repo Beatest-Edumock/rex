@@ -1,6 +1,6 @@
 import {PUSH_TEST_OVERVIEW} from "../../actions/testattempts";
 
-function testAttemptsReducer(state = [], action) {
+function testOverviewReducer(state = {test_attempts: []}, action) {
 
 
     switch (action.type) {
@@ -15,4 +15,4 @@ function testAttemptsReducer(state = [], action) {
 
 }
 
-export {testAttemptsReducer};
+export {testOverviewReducer};
