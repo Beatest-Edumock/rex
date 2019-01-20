@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Button, MenuButton} from 'grommet';
+import {Box, Button, MenuButton, Text} from 'grommet';
 import Reacttable from 'react-table'
 import 'react-table/react-table.css'
 import {ShortListModal} from "./ShortListModal";
@@ -127,6 +127,7 @@ class ShortListUI extends React.Component {
 
 
                 <Box height={"90%"} margin={'small'}>
+                    <Text align="center" textAlign="center">{this.props.testName}</Text>
                     <Box>
 
 
