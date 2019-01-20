@@ -3,9 +3,13 @@ import {ShortListUI} from "./ShortListUI";
 import {pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 import {connect} from 'react-redux'
 import {Box, Text} from "grommet";
-import {FilterBox} from "../../Common/FilterBox/FilterBox";
-import {SimpleResultProcessing} from "react-filter-box";
+import {FilterBox, FilterResultProcessing} from "../../Common/FilterBox/FilterBox";
 
+
+const columnDefinitions = {
+    name: {columField: "name", columnText: "Name", type: "text"},
+    score: {columField: "score", columnText: "Score", type: "text"},
+};
 
 class ShortList extends React.Component {
 
@@ -30,21 +34,24 @@ class ShortList extends React.Component {
                 Header: props => <Box>Name</Box>,
                 accessor: d => d.user.full_name,
                 filterMethod: (filter, row) => {
-                    return new CustomResultProcessing([{columField: "name", columnText: "Name", type: "text"}]).predicate(row, filter.value);
+                    return new FilterResultProcessing([columnDefinitions.name]).predicate(row, filter.value);
                 },
                 Filter: ({ filter, onChange }) =>
-                    <FilterBox options={[{columField: "name", columnText: "Name", type: "text"}]} onCondition={onChange}/>
+                    <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>
             },
             {
                 Header: props => <Text size={"xsmall"}>Section <br/> Cutoffs</Text>,
                 columns: []
             },
             {
+                id: 'score',
                 Header: props => <Text size={"xsmall"}>Total <br/> Score</Text>,
                 accessor: "score",
                 filterMethod: (filter, row) => {
-                    return row[filter.id] >= filter.value;
+                    return new FilterResultProcessing([columnDefinitions.score]).predicate(row, filter.value);
                 },
+                Filter: ({ filter, onChange }) =>
+                    <FilterBox options={[columnDefinitions.score]} onCondition={onChange}/>,
                 maxWidth: 45,
                 Cell: props => <Box round="xsmall"
                                     basis="full"
@@ -60,6 +67,8 @@ class ShortList extends React.Component {
 
         if (this.props.testOverview.test_attempts.length > 0) {
             for (let i = 0; i < this.props.testOverview.test_attempts[0].section_attempts.length; i++) {
+                //TODO: remove contains and !contains because it doesn't work for number values
+                columnDefinitions[`$section_${i + 1}`] = {columField: `$section_${i + 1}`, columnText: `Section_${i + 1}`, type: "text"};
                 columnsModified[1].columns.push({
 
                     Header: `${i + 1}`,
@@ -70,9 +79,10 @@ class ShortList extends React.Component {
                     resizable: false,
                     // maxWidth: 45,
                     filterMethod: (filter, row) => {
-                        return row[filter.id] >= filter.value;
-
+                        return new FilterResultProcessing([columnDefinitions[`$section_${i + 1}`]]).predicate(row, filter.value);
                     },
+                    Filter: ({ filter, onChange }) =>
+                        <FilterBox options={[columnDefinitions[`$section_${i + 1}`]]} onCondition={onChange}/>,
                     Cell: props => <Box round="xsmall"
                                         basis="full"
                                         align="center"
@@ -102,23 +112,6 @@ class ShortList extends React.Component {
         );
     }
 
-}
-
-class CustomResultProcessing extends SimpleResultProcessing {
-
-    // override this method
-    filter(row, fieldOrLabel, operator, value) {
-        let field = this.tryToGetFieldCategory(fieldOrLabel);
-
-        switch (operator) {
-            case "==": return row[field] == value;
-            case "!=": return row[field] != value;
-            case "contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) >= 0;
-            case "!contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) < 0;
-        }
-
-        return false;
-    }
 }
 
 function mapStateToProps(state, ownProps) {
