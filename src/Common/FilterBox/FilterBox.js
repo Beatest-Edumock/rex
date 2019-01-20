@@ -12,8 +12,7 @@ class FilterBox extends React.Component {
     }
 
     onParseOk(expressions){
-        //TODO: how can expressions be reset?
-        if (expressions != null && expressions.length > 0) {
+        if (expressions != null && expressions.length >= 0) {
             this.props.onCondition(expressions);
         }
     }
