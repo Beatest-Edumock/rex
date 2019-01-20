@@ -36,7 +36,7 @@ class ShortList extends React.Component {
                 filterMethod: (filter, row) => {
                     return new FilterResultProcessing([columnDefinitions.name]).predicate(row, filter.value);
                 },
-                Filter: ({ filter, onChange }) =>
+                Filter: ({filter, onChange}) =>
                     <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>
             },
             {
@@ -50,7 +50,7 @@ class ShortList extends React.Component {
                 filterMethod: (filter, row) => {
                     return new FilterResultProcessing([columnDefinitions.score]).predicate(row, filter.value);
                 },
-                Filter: ({ filter, onChange }) =>
+                Filter: ({filter, onChange}) =>
                     <FilterBox options={[columnDefinitions.score]} onCondition={onChange}/>,
                 maxWidth: 45,
                 Cell: props => <Box round="xsmall"
@@ -81,7 +81,7 @@ class ShortList extends React.Component {
                     filterMethod: (filter, row) => {
                         return new FilterResultProcessing([columnDefinitions[`$section_${i + 1}`]]).predicate(row, filter.value);
                     },
-                    Filter: ({ filter, onChange }) =>
+                    Filter: ({filter, onChange}) =>
                         <FilterBox options={[columnDefinitions[`$section_${i + 1}`]]} onCondition={onChange}/>,
                     Cell: props => <Box round="xsmall"
                                         basis="full"
@@ -104,7 +104,8 @@ class ShortList extends React.Component {
 
 
         return (
-            <ShortListUI data={this.props.testOverview.test_attempts}
+            <ShortListUI ref={r => (this.shortListUI = r)}
+                         data={this.props.testOverview.test_attempts}
                          isLoading={this.props.testOverview.name === undefined}
                          column_format={columnsModified.slice()}
 
