@@ -24,11 +24,6 @@ class ShortList extends React.Component {
 
     render() {
         const columns = [
-            // {
-            //     Header: "#",
-            //     accessor: "id",
-            //     maxWidth: 80,
-            // },
             {
                 id: 'name',
                 Header: props => <Box>Name</Box>,
@@ -104,6 +99,31 @@ class ShortList extends React.Component {
             }
 
         }
+
+        columnsModified.push({
+
+            Header: "Application Status",
+            id: 'application_status',
+            accessor: d => {
+                return d.user.application.type;
+            },
+            resizable: true,
+
+            Cell: props => (<Box round="xsmall"
+                                 basis="full"
+                                 align="center"
+                                 justify="center"
+                                 pad={{horizontal: "small", vertical: "xsmall"}}
+
+                >
+
+                    <Text textalign="center" size="xsmall"> {props.value}</Text>
+
+                </Box>
+            )
+
+
+        });
 
 
         return (

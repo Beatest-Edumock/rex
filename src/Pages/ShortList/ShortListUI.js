@@ -91,7 +91,7 @@ class ShortListUI extends React.Component {
             const currentRecords = wrappedInstance.getResolvedState().sortedData;
             // we just push all the IDs onto the selection array
             currentRecords.forEach(item => {
-                selection.push(item._original.user_id);
+                selection.push(item._original.id);
             });
         }
         this.setState({selectAll, selection});
@@ -135,7 +135,7 @@ class ShortListUI extends React.Component {
                             {...checkboxProps}
                             ref={r => (this.checkboxTable = r)}
                             className="-highlight -striped"
-                            keyField="user_id"
+                            keyField="id"
                             loading={this.props.isLoading}
                             onFetchData={(state, instance) => {
                                 //console.log(state.filtered);
