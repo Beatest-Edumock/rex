@@ -66,12 +66,15 @@ class ShortList extends React.Component {
         const columnsModified = columns.slice();
 
         if (this.props.testOverview.test_attempts.length > 0) {
+
+            const sections = this.props.testOverview.sections;
             for (let i = 0; i < this.props.testOverview.test_attempts[0].section_attempts.length; i++) {
+
                 //TODO: remove contains and !contains because it doesn't work for number values
                 columnDefinitions[`$section_${i + 1}`] = {columField: `$section_${i + 1}`, columnText: `Section_${i + 1}`, type: "text"};
                 columnsModified[1].columns.push({
 
-                    Header: `${i + 1}`,
+                    Header: props => <Text>{i + 1} <br/> {sections[i].name}</Text>,
                     id: `$section_${i + 1}`,
                     accessor: d => {
                         return d.section_attempts[i].score
