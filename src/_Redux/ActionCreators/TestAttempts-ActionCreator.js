@@ -1,4 +1,5 @@
 import {PUSH_TEST_OVERVIEW, UPDATE_APPLICATION, UPDATE_TEST_ATTEMPT_SUBSET} from "../actions/testattempts";
+import {updateApplicationStatusAPI} from "../../_Api/Applications";
 
 function pushTestAttempts(data) {
 
@@ -23,15 +24,15 @@ function updateApplicationStatusByTestAttemptIDAsyncAC(testAttemptIDs, newStatus
 
     return (dispatch, getState) => {
         const {test_attempts} = getState().testOverview;
+        const userIDs = [];
 
 
-        let updatedApplicants = test_attempts.filter(el => testAttemptIDs.includes(el.id));
-
-        updatedApplicants = test_attempts.map(el => {
+        const updatedApplicants = test_attempts.map(el => {
             if (!testAttemptIDs.includes(el.id)) {
                 return el;
             }
 
+            userIDs.push(el.user_id);
 
             return {
                 ...el,
@@ -44,6 +45,9 @@ function updateApplicationStatusByTestAttemptIDAsyncAC(testAttemptIDs, newStatus
                 }
             };
         });
+
+        updateApplicationStatusAPI(userIDs, newStatus);
+
 
         dispatch(updateApplications(updatedApplicants));
 

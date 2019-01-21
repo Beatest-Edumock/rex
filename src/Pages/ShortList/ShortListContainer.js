@@ -37,9 +37,6 @@ class ShortList extends React.Component {
                 Filter: ({filter, onChange}) =>
                     <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>,
                 Footer: (props) => {
-                    if (pooop)
-                        console.log(pooop.state.selection);
-
                     return <Text>Selected: {pooop && pooop.state.selection.length}</Text>
                 }
             },
