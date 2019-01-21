@@ -2,7 +2,7 @@ import React from 'react';
 import {ShortListUI} from "./ShortListUI";
 import {pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 import {connect} from 'react-redux'
-import {Box, Text} from "grommet";
+import {Box, Button, Text} from "grommet";
 import {FilterBox, FilterResultProcessing} from "../../Common/FilterBox/FilterBox";
 
 
@@ -23,6 +23,9 @@ class ShortList extends React.Component {
 
 
     render() {
+
+        const pooop = this.shortListUI;
+
         const columns = [
             {
                 id: 'name',
@@ -32,7 +35,13 @@ class ShortList extends React.Component {
                     return new FilterResultProcessing([columnDefinitions.name]).predicate(row, filter.value);
                 },
                 Filter: ({filter, onChange}) =>
-                    <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>
+                    <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>,
+                Footer: (props) => {
+                    if (pooop)
+                        console.log(pooop.state.selection);
+
+                    return <Text>Selected: {pooop && pooop.state.selection.length}</Text>
+                }
             },
             {
                 Header: props => <Text size={"xsmall"}>Section <br/> Cutoffs</Text>,

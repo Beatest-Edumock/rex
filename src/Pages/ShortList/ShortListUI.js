@@ -4,6 +4,8 @@ import Reacttable from 'react-table'
 import 'react-table/react-table.css'
 import {ShortListModal} from "./ShortListModal";
 import selectTable from "react-table/lib/hoc/selectTable";
+import {UpdateApplicationStatusButtonsUI} from "./UpdateApplicationStatusButtons/UpdateApplicationStatusButtonsUI";
+import {UpdateApplicationStatusButtons} from "./UpdateApplicationStatusButtons";
 
 const ReactTable = selectTable(Reacttable);
 
@@ -19,7 +21,6 @@ class ShortListUI extends React.Component {
 
     constructor(props) {
         super(props);
-
 
     }
 
@@ -163,18 +164,26 @@ class ShortListUI extends React.Component {
                 <Box margin="small" gap="medium" fill={"horizontal"} direction="row-responsive" justify="center">
 
                     <Box align="start" basis="1/3">
+
+
                         <Button align="start" alignSelf={"start"} label={"Change Test"} onClick={() => {
                             this.setState({
                                 ...this.state,
                                 isModalOpen: true
                             })
                         }}/>
+
+
                     </Box>
+
 
                     <Box basis="2/3" direction='row' gap="medium">
                         <Box align="end" basis="1/2"/>
                         <Box align="end" alignContent="stretch" gap="medium" direction="row">
-                            <Button primary color="status-ok" label={"Approve"}/>
+                            {/*<Button primary color="status-ok" label={"Approve"} onClick={() => {*/}
+                            {/*}}/>*/}
+                            <UpdateApplicationStatusButtons selectedApplicants={this.state.selection}/>
+
                             <Button primary color="status-critical" label={"Reject"}/>
                             <Button primary color="status-warning" label={"Wait-List"}/>
                         </Box>

@@ -19,6 +19,11 @@ function removeUserAC() {
 
     return {type: REMOVE_USER};
 
+}
+
+function updateTestAttempts(updatedAttempts) {
+
+    return {type: REMOVE_USER, data: updatedAttempts};
 
 }
 
