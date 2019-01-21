@@ -136,13 +136,15 @@ class ShortList extends React.Component {
 
 
         return (
-            <ShortListUI ref={r => (this.shortListUI = r)}
-                         data={this.props.testOverview.test_attempts}
-                         testName={this.props.testOverview.name}
-                         isLoading={this.props.testOverview.name === undefined}
-                         column_format={columnsModified.slice()}
+            <div>
+                <ShortListUI ref={r => (this.shortListUI = r)}
+                             data={this.props.testOverview.test_attempts}
+                             testName={this.props.testOverview.name}
+                             isLoading={this.props.testOverview.name === undefined}
+                             column_format={columnsModified.slice()}
 
-            />
+                />
+            </div>
         );
     }
 

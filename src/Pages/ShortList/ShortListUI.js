@@ -127,7 +127,7 @@ class ShortListUI extends React.Component {
                 }
 
 
-                <Box height={"90%"} margin={'small'}>
+                <Box height={"90%"} margin={'none'}>
                     <Text align="center" textAlign="center">{this.props.testName}</Text>
                     <Box>
 
@@ -161,7 +161,7 @@ class ShortListUI extends React.Component {
                     </Box>
                 </Box>
 
-                <Box margin="small" gap="medium" fill={"horizontal"} direction="row-responsive" justify="center">
+                <Box margin={{top: "small", bottom: "small"}} gap="medium" fill={"horizontal"} direction="row-responsive" justify="center">
 
                     <Box align="start" basis="1/3">
 
