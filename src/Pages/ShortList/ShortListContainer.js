@@ -24,7 +24,7 @@ class ShortList extends React.Component {
 
     render() {
 
-        const pooop = this.shortListUI;
+        const shortListUIInstance = this.shortListUI;
 
         const columns = [
             {
@@ -37,7 +37,7 @@ class ShortList extends React.Component {
                 Filter: ({filter, onChange}) =>
                     <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>,
                 Footer: (props) => {
-                    return <Text>Selected: {pooop && pooop.state.selection.length}</Text>
+                    return <Text>Selected: {shortListUIInstance && shortListUIInstance.state.selection.length}</Text>
                 }
             },
             {
@@ -53,15 +53,8 @@ class ShortList extends React.Component {
                 },
                 Filter: ({filter, onChange}) =>
                     <FilterBox options={[columnDefinitions.score]} onCondition={onChange}/>,
-                maxWidth: 45,
-                Cell: props => <Box round="xsmall"
-                                    basis="full"
-                                    align="center"
-                                    justify="center"
-                                    pad={{horizontal: "small", vertical: "xsmall"}}
-                                    background={props.value < 0 ? "status-critical" : "status-ok"}>
-                    <Text textAlign="center" size="xsmall"> {props.value}</Text>
-                </Box>
+                Cell: props =>
+                    <Text textAlign="center" size="large" margin="large"> {props.value}</Text>
             }
         ];
         const columnsModified = columns.slice();
@@ -87,16 +80,9 @@ class ShortList extends React.Component {
                     },
                     Filter: ({filter, onChange}) =>
                         <FilterBox options={[columnDefinitions[`$section_${i + 1}`]]} onCondition={onChange}/>,
-                    Cell: props => <Box round="xsmall"
-                                        basis="full"
-                                        align="center"
-                                        justify="center"
-                                        pad={{horizontal: "small", vertical: "xsmall"}}
-                                        background={props.value < 0 ? "status-critical" : "status-ok"}>
+                    Cell: props =>
 
-                        <Text textalign="center" size="xsmall"> {props.value}</Text>
-
-                    </Box>
+                        <Text textalign="center" size="medium" color={props.value < 0 ? "status-critical" : "status-ok"}> {props.value}</Text>
 
 
                 })
@@ -115,18 +101,35 @@ class ShortList extends React.Component {
             },
             resizable: true,
 
-            Cell: props => (<Box round="xsmall"
-                                 basis="full"
-                                 align="center"
-                                 justify="center"
-                                 pad={{horizontal: "small", vertical: "xsmall"}}
+            Cell: props => {
+                let color = null;
+                switch (props.value) {
+                    case "accepted":
+                        color = "status-ok";
+                        break;
+                    case "rejected":
+                        color = "status-critical";
+                        break;
+                    case "shortlisted":
+                        color = "status-warning";
+                }
 
-                >
 
-                    <Text textalign="center" size="xsmall"> {props.value}</Text>
+                return (
+                    <Box round="xsmall"
+                         basis="full"
+                         align="center"
+                         justify="center"
+                         background={color}
+                         pad={{horizontal: "small", vertical: "xsmall"}}
 
-                </Box>
-            )
+                    >
+
+                        <Text textalign="center" size="xsmall"> {props.value}</Text>
+
+                    </Box>
+                );
+            }
 
 
         });
