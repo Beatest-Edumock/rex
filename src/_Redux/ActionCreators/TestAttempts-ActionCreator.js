@@ -26,7 +26,6 @@ function updateApplicationStatusByTestAttemptIDAsyncAC(testAttemptIDs, newStatus
         const {test_attempts} = getState().testOverview;
         const userIDs = [];
 
-
         const updatedApplicants = test_attempts.map(el => {
             if (!testAttemptIDs.includes(el.id)) {
                 return el;
@@ -46,7 +45,9 @@ function updateApplicationStatusByTestAttemptIDAsyncAC(testAttemptIDs, newStatus
             };
         });
 
-        updateApplicationStatusAPI(userIDs, newStatus);
+        updateApplicationStatusAPI(userIDs, newStatus).catch(() => {
+            dispatch(updateApplications(test_attempts));
+        });
 
 
         dispatch(updateApplications(updatedApplicants));

@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 
 function UpdateApplicationStatusButtons(props) {
 
-    return (<UpdateApplicationStatusButtonsUI onClick={() => props.updateApplications(props.selectedApplicants)}/>)
+
+    return (<UpdateApplicationStatusButtonsUI type={props.type}
+                                              onClick={() => props.updateApplications(props.selectedApplicants, props.type)}/>);
 
 }
 
@@ -14,8 +16,8 @@ function UpdateApplicationStatusButtons(props) {
 function mapDispatchToProps(dispatch) {
 
     return {
-        updateApplications: (updatedApplications) => {
-            dispatch(updateApplicationStatusByTestAttemptIDAsyncAC(updatedApplications, "accepted"))
+        updateApplications: (updatedApplications, newType) => {
+            dispatch(updateApplicationStatusByTestAttemptIDAsyncAC(updatedApplications, newType))
         }
     }
 

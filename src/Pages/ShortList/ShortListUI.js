@@ -182,10 +182,10 @@ class ShortListUI extends React.Component {
                         <Box align="end" alignContent="stretch" gap="medium" direction="row">
                             {/*<Button primary color="status-ok" label={"Approve"} onClick={() => {*/}
                             {/*}}/>*/}
-                            <UpdateApplicationStatusButtons selectedApplicants={this.state.selection}/>
+                            <UpdateApplicationStatusButtons type="accepted" selectedApplicants={this.state.selection}/>
+                            <UpdateApplicationStatusButtons type="shortlisted" selectedApplicants={this.state.selection}/>
+                            <UpdateApplicationStatusButtons type="rejected" selectedApplicants={this.state.selection}/>
 
-                            <Button primary color="status-critical" label={"Reject"}/>
-                            <Button primary color="status-warning" label={"Wait-List"}/>
                         </Box>
                     </Box>
                 </Box>
