@@ -3,7 +3,7 @@ import {ShortListUI} from "./ShortListUI";
 import {pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 import {connect} from 'react-redux'
 import {Box, Button, Text} from "grommet";
-import {FilterBox, FilterResultProcessing} from "../../Common/FilterBox/FilterBox";
+import {FilterBox, FilterResultProcessing, ScoreAutoComplete, ScoreResultProcessing} from "../../Common/FilterBox/FilterBox";
 
 
 const columnDefinitions = {
@@ -49,10 +49,10 @@ class ShortList extends React.Component {
                 Header: props => <Text size={"xsmall"}>Total <br/> Score</Text>,
                 accessor: "score",
                 filterMethod: (filter, row) => {
-                    return new FilterResultProcessing([columnDefinitions.score]).predicate(row, filter.value);
+                    return new ScoreResultProcessing([columnDefinitions.score]).predicate(row, filter.value);
                 },
                 Filter: ({filter, onChange}) =>
-                    <FilterBox options={[columnDefinitions.score]} onCondition={onChange}/>,
+                    <FilterBox autoCompleteHandler={new ScoreAutoComplete([], [columnDefinitions.score])} options={[columnDefinitions.score]} onCondition={onChange}/>,
                 Cell: props =>
                     <Text textAlign="center" size="large" margin="large"> {props.value}</Text>
             }
@@ -66,6 +66,7 @@ class ShortList extends React.Component {
 
                 //TODO: remove contains and !contains because it doesn't work for number values
                 columnDefinitions[`$section_${i + 1}`] = {columField: `$section_${i + 1}`, columnText: `Section_${i + 1}`, type: "text"};
+                let scoreAutoComplete = new ScoreAutoComplete([], [columnDefinitions[`$section_${i + 1}`]]);
                 columnsModified[1].columns.push({
 
                     Header: props => <Text>{i + 1} <br/> {sections[i].name}</Text>,
@@ -76,10 +77,10 @@ class ShortList extends React.Component {
                     resizable: false,
                     // maxWidth: 45,
                     filterMethod: (filter, row) => {
-                        return new FilterResultProcessing([columnDefinitions[`$section_${i + 1}`]]).predicate(row, filter.value);
+                        return new ScoreResultProcessing([columnDefinitions[`$section_${i + 1}`]]).predicate(row, filter.value);
                     },
                     Filter: ({filter, onChange}) =>
-                        <FilterBox options={[columnDefinitions[`$section_${i + 1}`]]} onCondition={onChange}/>,
+                        <FilterBox autoCompleteHandler={scoreAutoComplete} options={[columnDefinitions[`$section_${i + 1}`]]} onCondition={onChange}/>,
                     Cell: props =>
 
                         <Text textalign="center" size="medium" color={props.value < 0 ? "status-critical" : "status-ok"}> {props.value}</Text>
