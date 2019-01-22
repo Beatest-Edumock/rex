@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactFilterBox, {SimpleResultProcessing} from "react-filter-box";
+import ReactFilterBox, {AutoCompleteOption, SimpleResultProcessing, Expression, GridDataAutoCompleteHandler} from "react-filter-box";
 import "react-filter-box/lib/react-filter-box.css";
 
 
@@ -19,7 +19,7 @@ class FilterBox extends React.Component {
 
     render(){
         return <ReactFilterBox
-            autoCompletHandler={this.props.autoComplete}
+            autoCompleteHandler={this.props.autoCompleteHandler}
             options={this.options}
             onParseOk={this.onParseOk.bind(this)}
         />
@@ -32,8 +32,8 @@ class FilterResultProcessing extends SimpleResultProcessing {
     filter(row, fieldOrLabel, operator, value){
         let field = this.tryToGetFieldCategory(fieldOrLabel);
         switch(operator){
-            case "==": return row[field] == value;
-            case "!=": return row[field] != value;
+            case "==": return row[field] === value;
+            case "!=": return row[field] !== value;
             case "contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) >=0;
             case "!contains": return row[field].toLowerCase().indexOf(value.toLowerCase()) <0;
         }
@@ -42,4 +42,32 @@ class FilterResultProcessing extends SimpleResultProcessing {
     }
 }
 
-export {FilterBox, FilterResultProcessing};
+class ScoreAutoComplete extends GridDataAutoCompleteHandler {
+
+    // override this method to add new your operator
+    needOperators(parsedCategory) {
+        let result = [">=", "<=", ">", "<", "==", "!="];
+        return result;
+    }
+}
+
+class ScoreResultProcessing extends SimpleResultProcessing {
+
+    // override this method to add your handler for startsWith operator
+    filter(row, fieldOrLabel, operator, value){
+        let field = this.tryToGetFieldCategory(fieldOrLabel);
+        let score = parseFloat(value);
+        switch(operator){
+            case ">=": return row[field] >= score;
+            case "<=": return row[field] <= score;
+            case "<": return row[field] < score;
+            case ">": return row[field] > score;
+            case "==": return row[field] === score;
+            case "!=": return row[field] !== score;
+        }
+
+        return false;
+    }
+}
+
+export {FilterBox, FilterResultProcessing, ScoreAutoComplete, ScoreResultProcessing};
