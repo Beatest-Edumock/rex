@@ -10,6 +10,16 @@ import {UpdateApplicationStatusButtons} from "./UpdateApplicationStatusButtons";
 const ReactTable = selectTable(Reacttable);
 
 
+function openUserPerformanceWindow(userId, testId) {
+
+
+    let windowReference = window.open("", "_blank", "height=8000, width=8000,status=yes,toolbar=no,menubar=no,location=no");
+    windowReference.location = `http://beatest.in/test/${testId}/performance?asUser=${userId}`;
+
+
+}
+
+
 class ShortListUI extends React.Component {
 
     state = {
@@ -143,6 +153,32 @@ class ShortListUI extends React.Component {
                             }
                             }
 
+                            getTdProps={(state, rowInfo, column, instance) => {
+                                return {
+                                    onClick: (e, handleOriginal) => {
+
+                                        // IMPORTANT! React-Table uses onClick internally to trigger
+                                        // events like expanding SubComponents and pivots.
+                                        // By default a custom 'onClick' handler will override this functionality.
+                                        // If you want to fire the original onClick handler, call the
+                                        // 'handleOriginal' function.
+                                        console.log(rowInfo.original);
+
+                                        openUserPerformanceWindow(rowInfo.original.user_id, rowInfo.original.test_id);
+
+
+                                        //////////////////////////////////////////////////////////////////////////////////////
+                                        //// FIXME REFACTOR THIS INTO A BETTER PLACE
+
+
+                                        //////////////////////////////////////////////////////////////////////////////////////
+                                        if (handleOriginal) {
+                                            handleOriginal();
+                                        }
+                                    }
+                                };
+                            }}
+
                             filterable={true}
                             data={this.props.data}
                             columns={this.props.column_format}>
@@ -190,7 +226,7 @@ class ShortListUI extends React.Component {
                     </Box>
                 </Box>
             </Box>
-        )
+        );
     }
 }
 
