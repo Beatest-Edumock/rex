@@ -38,7 +38,15 @@ class ShortList extends React.Component {
                     <FilterBox options={[columnDefinitions.name]} onCondition={onChange}/>,
                 Footer: (props) => {
                     return <Text>Selected: {shortListUIInstance && shortListUIInstance.state.selection.length}</Text>
-                }
+                },
+                Cell: props =>
+                    <Text size="small">     {props.value.replace(
+                        /\w\S*/g,
+                        function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        }
+                    )}
+                    </Text>
             },
             {
                 Header: props => <Text size={"xsmall"}>Section <br/> Cutoffs</Text>,
@@ -54,7 +62,7 @@ class ShortList extends React.Component {
                 Filter: ({filter, onChange}) =>
                     <FilterBox autoCompleteHandler={new ScoreAutoComplete([], [columnDefinitions.score])} options={[columnDefinitions.score]} onCondition={onChange}/>,
                 Cell: props =>
-                    <Text textAlign="center" size="large" margin="large"> {props.value}</Text>
+                    <Text textAlign="center" size="small" margin="large"> {props.value}</Text>
             }
         ];
         const columnsModified = columns.slice();
@@ -74,7 +82,6 @@ class ShortList extends React.Component {
                     accessor: d => {
                         return d.section_attempts[i].score
                     },
-                    resizable: false,
                     // maxWidth: 45,
                     filterMethod: (filter, row) => {
                         return new ScoreResultProcessing([columnDefinitions[`$section_${i + 1}`]]).predicate(row, filter.value);
@@ -136,6 +143,31 @@ class ShortList extends React.Component {
         });
 
 
+        columnsModified.push({
+
+            Header: "College",
+            id: 'college_name',
+            accessor: d => {
+                if (d.user.college !== null)
+                    return d.user.college.college_name;
+            },
+
+            Cell: props => {
+                let color = null;
+
+                // const value = props.value.replace(/" *"/g, "<br/>");
+                const value = props.value;
+                // alert(value);
+
+
+                return (
+
+                    <Text textalign="center" size="xsmall">{value}</Text>
+                );
+            }
+
+
+        });
         return (
             <div>
                 <ShortListUI ref={r => (this.shortListUI = r)}
