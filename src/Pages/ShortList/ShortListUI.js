@@ -6,6 +6,7 @@ import {ShortListModal} from "./ShortListModal";
 import selectTable from "react-table/lib/hoc/selectTable";
 import {UpdateApplicationStatusButtonsUI} from "./UpdateApplicationStatusButtons/UpdateApplicationStatusButtonsUI";
 import {UpdateApplicationStatusButtons} from "./UpdateApplicationStatusButtons";
+import {ExportCSVButton} from "./ExportCSVButton";
 
 const ReactTable = selectTable(Reacttable);
 
@@ -162,7 +163,6 @@ class ShortListUI extends React.Component {
                                         // By default a custom 'onClick' handler will override this functionality.
                                         // If you want to fire the original onClick handler, call the
                                         // 'handleOriginal' function.
-                                        console.log(rowInfo.original);
 
                                         openUserPerformanceWindow(rowInfo.original.user_id, rowInfo.original.test_id);
 
@@ -214,10 +214,10 @@ class ShortListUI extends React.Component {
 
 
                     <Box basis="2/3" direction='row' gap="medium">
-                        <Box align="end" basis="1/2"/>
+                        <Box align="end" basis="auto"/>
                         <Box align="end" alignContent="stretch" gap="medium" direction="row">
-                            {/*<Button primary color="status-ok" label={"Approve"} onClick={() => {*/}
-                            {/*}}/>*/}
+
+                            <ExportCSVButton data={this.props.data}/>
                             <UpdateApplicationStatusButtons type="accepted" selectedApplicants={this.state.selection}/>
                             <UpdateApplicationStatusButtons type="shortlisted" selectedApplicants={this.state.selection}/>
                             <UpdateApplicationStatusButtons type="rejected" selectedApplicants={this.state.selection}/>
