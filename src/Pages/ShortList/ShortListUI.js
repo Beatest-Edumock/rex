@@ -197,7 +197,7 @@ class ShortListUI extends React.Component {
                     </Box>
                 </Box>
 
-                <Box margin={{top: "small", bottom: "small"}} gap="medium" fill={"horizontal"} direction="row-responsive" justify="center">
+                <Box  margin={{top:"large",left:"medium"}}   >
 
                     <Box align="start" basis="1/3">
 
