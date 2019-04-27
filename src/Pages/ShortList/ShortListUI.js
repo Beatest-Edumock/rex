@@ -147,8 +147,7 @@ class ShortListUI extends React.Component {
                             {...checkboxProps}
                             ref={r => (this.checkboxTable = r)}
                             className="-highlight -striped"
-                            pageSizeOptions: {[5, 10, 20, 25]}
-
+                            pageSizeOptions= {[5, 10, 20, 25]}
                             keyField="id"
                             loading={this.props.isLoading}
                             onFetchData={(state, instance) => {
