@@ -16,7 +16,7 @@ function openUserPerformanceWindow(userId, testId) {
 
 
     let windowReference = window.open("", "_blank", "height=8000, width=8000,status=yes,toolbar=no,menubar=no,location=no");
-    windowReference.location = `http://localhost:3000/test/${encodeTestID(testId)}/performance?asUser=${userId}`;
+    windowReference.location = `http://beatest.in/test/${encodeTestID(testId)}/performance?asUser=${userId}`;
 
 }
 
