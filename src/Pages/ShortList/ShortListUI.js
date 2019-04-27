@@ -16,7 +16,7 @@ function openUserPerformanceWindow(userId, testId) {
 
 
     let windowReference = window.open("", "_blank", "height=8000, width=8000,status=yes,toolbar=no,menubar=no,location=no");
-    windowReference.location = `http://beatest.in/test/${encodeTestID(testId)}/performance?asUser=${userId}`;
+    windowReference.location = `http://localhost:3000/test/${encodeTestID(testId)}/performance?asUser=${userId}`;
 
 }
 
@@ -147,6 +147,8 @@ class ShortListUI extends React.Component {
                             {...checkboxProps}
                             ref={r => (this.checkboxTable = r)}
                             className="-highlight -striped"
+                            pageSizeOptions: {[5, 10, 20, 25]}
+
                             keyField="id"
                             loading={this.props.isLoading}
                             onFetchData={(state, instance) => {
@@ -197,7 +199,7 @@ class ShortListUI extends React.Component {
                     </Box>
                 </Box>
 
-                <Box  margin={{top:"large",left:"medium"}}   >
+                <Box margin={{top: "large", left: "medium"}}>
 
                     <Box align="start" basis="1/3">
 
