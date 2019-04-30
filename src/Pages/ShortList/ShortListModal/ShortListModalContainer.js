@@ -41,19 +41,18 @@ class ShortListModal extends React.Component {
         const testId = this.props.user.corporate.tests[selectedTestIdx].id;
 
 
-        getTestAttemptsOverviewAPI(testId).then(({data}) => {
-            this.props.addTestAttemptsOverview(data);
-        });
+        // getTestAttemptsOverviewAPI(testId, date).then(({data}) => {
+        //     this.props.addTestAttemptsOverview(data);
+        // });
 
 
-        //
-        // getTestAttemptDatesAPI(testId).then(({data}) => {
-        //     this.setState({
-        //         ...this.state,
-        //         testDates: data
-        //     })
-        //
-        // })
+        getTestAttemptDatesAPI(testId).then(({data}) => {
+            this.setState({
+                ...this.state,
+                testDates: data
+            })
+
+        })
     }
 
     render() {
