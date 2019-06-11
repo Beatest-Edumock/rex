@@ -16,9 +16,7 @@ function openUserPerformanceWindow(userId, testId) {
 
 
     let windowReference = window.open("", "_blank", "height=8000, width=8000,status=yes,toolbar=no,menubar=no,location=no");
-
     windowReference.location = `http://beatest.in/test/${encodeTestID(testId)}/performance?asUser=${userId}`;
-
 
 }
 
@@ -114,6 +112,9 @@ class ShortListUI extends React.Component {
 
     render() {
 
+        // if (this.checkboxTable)
+        //     console.log(this.checkboxTable.getWrappedInstance().getResolvedState().sortedData);
+
 
         const checkboxProps = {
             selectAll: this.state.selectAll,
@@ -141,6 +142,14 @@ class ShortListUI extends React.Component {
 
 
                 <Box height={"90%"} margin={'none'}>
+
+                    <Box margin="small">
+                        <Box align="end" alignContent="stretch" gap="medium" direction="row">
+                            <Button primary label="Load Qualitative Analysis" onClick={this.props.onQualitativeAnalysesClick}/>
+                            <Button primary label="Load Personality" onClick={this.props.onPersonalityLoadClick}/>
+                        </Box>
+                    </Box>
+
                     <Text align="center" textAlign="center">{this.props.testName}</Text>
                     <Box>
 
@@ -149,7 +158,7 @@ class ShortListUI extends React.Component {
                             {...checkboxProps}
                             ref={r => (this.checkboxTable = r)}
                             className="-highlight -striped"
-                            pageSizeOptions= {[5, 10, 20, 25]}
+                            pageSizeOptions={[5, 10, 20, 25]}
                             keyField="id"
                             loading={this.props.isLoading}
                             onFetchData={(state, instance) => {
@@ -167,7 +176,9 @@ class ShortListUI extends React.Component {
                                         // If you want to fire the original onClick handler, call the
                                         // 'handleOriginal' function.
 
-                                        openUserPerformanceWindow(rowInfo.original.user_id, rowInfo.original.test_id);
+
+                                        if (rowInfo)
+                                            openUserPerformanceWindow(rowInfo.original.user_id, rowInfo.original.test_id);
 
 
                                         //////////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +231,7 @@ class ShortListUI extends React.Component {
                         <Box align="end" basis="auto"/>
                         <Box align="end" alignContent="stretch" gap="medium" direction="row">
 
-                            <ExportCSVButton data={this.props.data}/>
+                            <ExportCSVButton data={this.props.data} reactTableInstance={this.checkboxTable}/>
                             <UpdateApplicationStatusButtons type="accepted" selectedApplicants={this.state.selection}/>
                             <UpdateApplicationStatusButtons type="shortlisted" selectedApplicants={this.state.selection}/>
                             <UpdateApplicationStatusButtons type="rejected" selectedApplicants={this.state.selection}/>
