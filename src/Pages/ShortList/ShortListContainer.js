@@ -1,10 +1,20 @@
 import React from 'react';
 import {ShortListUI} from "./ShortListUI";
-import {pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
+import {pushPersonalityAnalysisAC, pushQualitativeAnalysisAC, pushTestAttempts} from "../../_Redux/ActionCreators/TestAttempts-ActionCreator";
 import {connect} from 'react-redux'
 import {Box, Button, Text} from "grommet";
 import {FilterBox, FilterResultProcessing, ScoreAutoComplete, ScoreResultProcessing} from "../../Common/FilterBox/FilterBox";
+import {getTestAttemptsPersonalityAnalysisAPI, getTestAttemptsQualitativeAnalysisAPI} from "../../_Api/Tests/TestAttempts/TestAttempts";
 
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+}
 
 const columnDefinitions = {
     name: {columField: "name", columnText: "Name", type: "text"},
@@ -18,6 +28,27 @@ class ShortList extends React.Component {
 
 
         super();
+        this.loadQualitativeAnalysis = this.loadQualitativeAnalysis.bind(this);
+        this.loadPersonalityAnalysis = this.loadPersonalityAnalysis.bind(this);
+
+    }
+
+    loadQualitativeAnalysis() {
+
+        getTestAttemptsQualitativeAnalysisAPI(this.props.testOverview.id).then(({data}) => {
+            this.props.addQualitativeAnalysisResults(data);
+
+        })
+
+    }
+
+    loadPersonalityAnalysis() {
+
+        getTestAttemptsPersonalityAnalysisAPI(this.props.testOverview.id).then(({data}) => {
+            if (data.test_attempts[0].sixteen_p_report)
+                this.props.addPersonalityAnalysisResults(data);
+
+        })
 
     }
 
@@ -157,7 +188,6 @@ class ShortList extends React.Component {
 
                 // const value = props.value.replace(/" *"/g, "<br/>");
                 const value = props.value;
-                // alert(value);
 
 
                 return (
@@ -168,12 +198,306 @@ class ShortList extends React.Component {
 
 
         });
+
+
+        // if (this.props.testOverview["id"]) {
+        //     if (this.props.testOverview.test_attempts[0].length !== 0) {
+        //         let report = this.props.testOverview.test_attempts[0].report;
+        //         // console.log(report);
+        //
+        //
+        //         if (report)
+        //             Object.keys(report).map((el) => {
+        //
+        //                 if (el === "is_finished" || el === "create_date")
+        //                     return;
+        //
+        //
+        //                 columnsModified.push({
+        //
+        //                     Header: toTitleCase(el).replace(/_/g, " "),
+        //                     id: el,
+        //                     width: 150,
+        //                     accessor: d => {
+        //                         if (d.report) {
+        //
+        //                             return d.report[el];
+        //                         }
+        //
+        //                     },
+        //
+        //                     Cell: props => {
+        //                         let color = null;
+        //
+        //                         // const value = props.value.replace(/" *"/g, "<br/>");
+        //                         const value = props.value;
+        //
+        //
+        //                         return (
+        //
+        //                             <Text textalign="center" size="xsmall">{value}</Text>
+        //                         );
+        //                     }
+        //
+        //
+        //                 });
+        //
+        //             });
+        //
+        //
+        //         // for (let i = 0; i < Object.keys(report).length; i++) {
+        //         //
+        //         //
+        //         //     columnsModified.push({
+        //         //
+        //         //         Header: toTitleCase(report[i]),
+        //         //         id: 'logical_reasoning_ability',
+        //         //         width: 1000,
+        //         //         accessor: d => {
+        //         //             if (d.report) {
+        //         //
+        //         //                 return d.report.logical_reasoning_ability;
+        //         //             }
+        //         //
+        //         //         },
+        //         //
+        //         //         Cell: props => {
+        //         //             let color = null;
+        //         //
+        //         //             // const value = props.value.replace(/" *"/g, "<br/>");
+        //         //             const value = props.value;
+        //         //
+        //         //
+        //         //             return (
+        //         //
+        //         //                 <Text textalign="center" size="xsmall">{value}</Text>
+        //         //             );
+        //         //         }
+        //         //
+        //         //
+        //         //     });
+        //         //
+        //         //
+        //         // }
+        //
+        //     }
+        // }
+
+
+        const QualitativeReportColumn = {
+            Header: "Qualitative Analysis",
+            id: 'qualitative_analysis',
+            columns: []
+
+        };
+
+        if (this.props.testOverview["id"]) {
+            if (this.props.testOverview.test_attempts[0].length !== 0) {
+                let report = this.props.testOverview.test_attempts[0].report;
+                // console.log(report);
+
+
+                if (report)
+                    Object.keys(report).map((el) => {
+
+                        if (el === "is_finished" || el === "create_date")
+                            return;
+
+
+                        QualitativeReportColumn.columns.push({
+
+                            Header: toTitleCase(el).replace(/_/g, " "),
+                            id: el,
+                            width: 150,
+                            accessor: d => {
+                                if (d.report) {
+
+                                    return d.report[el];
+                                }
+
+                            },
+
+                            Cell: props => {
+                                let color = null;
+
+                                // const value = props.value.replace(/" *"/g, "<br/>");
+                                const value = props.value;
+
+
+                                return (
+
+                                    <Text textalign="center" size="xsmall">{value}</Text>
+                                );
+                            }
+
+
+                        });
+
+                    });
+
+
+                columnsModified.push(QualitativeReportColumn);
+
+
+                // for (let i = 0; i < Object.keys(report).length; i++) {
+                //
+                //
+                //     columnsModified.push({
+                //
+                //         Header: toTitleCase(report[i]),
+                //         id: 'logical_reasoning_ability',
+                //         width: 1000,
+                //         accessor: d => {
+                //             if (d.report) {
+                //
+                //                 return d.report.logical_reasoning_ability;
+                //             }
+                //
+                //         },
+                //
+                //         Cell: props => {
+                //             let color = null;
+                //
+                //             // const value = props.value.replace(/" *"/g, "<br/>");
+                //             const value = props.value;
+                //
+                //
+                //             return (
+                //
+                //                 <Text textalign="center" size="xsmall">{value}</Text>
+                //             );
+                //         }
+                //
+                //
+                //     });
+                //
+                //
+                // }
+
+            }
+        }
+
+
+        const PersonalityAnalysis = {
+            Header: "Personality Analysis",
+            id: 'personality_analysis',
+            columns: []
+
+        };
+
+        if (this.props.testOverview["id"]) {
+            if (this.props.testOverview.test_attempts[0].length !== 0) {
+                let report = this.props.testOverview.test_attempts[0].personality;
+                // console.log(report);
+
+
+                if (report)
+                    Object.keys(report).map((el) => {
+
+                        if (el === "is_finished" || el === "create_date")
+                            return;
+
+                        if (!el.includes("_value"))
+                            return;
+
+                        let text = "";
+                        if (el.includes('mind'))
+                            text = "Introvert";
+
+                        if (el.includes('energy'))
+                            text = "Intuitive";
+
+                        if (el.includes('nature'))
+                            text = "Thinking";
+
+                        if (el.includes('tactics'))
+                            text = "Judging";
+
+                        if (el.includes('identity'))
+                            text = "Assertive";
+
+                        PersonalityAnalysis.columns.push({
+
+                            Header: text,
+                            id: el,
+                            width: 150,
+                            accessor: d => {
+                                if (d.personality) {
+
+                                    return d.personality[el];
+                                }
+
+                            },
+
+                            Cell: props => {
+                                let color = null;
+
+                                // const value = props.value.replace(/" *"/g, "<br/>");
+                                const value = props.value;
+
+
+                                return (
+
+                                    <Text textalign="center" size="xsmall">{value}</Text>
+                                );
+                            }
+
+
+                        });
+
+                    });
+
+
+                columnsModified.push(PersonalityAnalysis);
+
+
+                // for (let i = 0; i < Object.keys(report).length; i++) {
+                //
+                //
+                //     columnsModified.push({
+                //
+                //         Header: toTitleCase(report[i]),
+                //         id: 'logical_reasoning_ability',
+                //         width: 1000,
+                //         accessor: d => {
+                //             if (d.report) {
+                //
+                //                 return d.report.logical_reasoning_ability;
+                //             }
+                //
+                //         },
+                //
+                //         Cell: props => {
+                //             let color = null;
+                //
+                //             // const value = props.value.replace(/" *"/g, "<br/>");
+                //             const value = props.value;
+                //
+                //
+                //             return (
+                //
+                //                 <Text textalign="center" size="xsmall">{value}</Text>
+                //             );
+                //         }
+                //
+                //
+                //     });
+                //
+                //
+                // }
+
+            }
+        }
+
+
         return (
             <div>
                 <ShortListUI ref={r => (this.shortListUI = r)}
                              data={this.props.testOverview.test_attempts}
                              testName={this.props.testOverview.name}
                              isLoading={this.props.testOverview.name === undefined}
+                             onQualitativeAnalysesClick={this.loadQualitativeAnalysis}
+                             onPersonalityLoadClick={this.loadPersonalityAnalysis}
                              column_format={columnsModified.slice()}
 
                 />
@@ -200,6 +524,13 @@ function mapDispatchToProps(dispatch) {
     return {
         addTestAttemptsOverview: (data) => {
             dispatch(pushTestAttempts(data));
+        },
+
+        addQualitativeAnalysisResults: (data) => {
+            dispatch(pushQualitativeAnalysisAC(data))
+        },
+        addPersonalityAnalysisResults: (data) => {
+            dispatch(pushPersonalityAnalysisAC(data))
         }
     }
 

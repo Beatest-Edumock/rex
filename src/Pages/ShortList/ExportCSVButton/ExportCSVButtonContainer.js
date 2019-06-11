@@ -9,6 +9,13 @@ class ExportCSVButtonContainer extends Component {
 
     render() {
         // console.log(this.props.data);
+        if (this.props.reactTableInstance) {
+            console.log(this.props.reactTableInstance.getWrappedInstance().getResolvedState().sortedData);
+        }
+
+        if (this.props.reactTableInstance) {
+            console.log(this.props.reactTableInstance.getWrappedInstance().getResolvedState());
+        }
 
         const data = this.props.data.map(el => {
 

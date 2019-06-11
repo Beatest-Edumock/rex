@@ -1,4 +1,4 @@
-import {PUSH_TEST_OVERVIEW, UPDATE_APPLICATION, UPDATE_TEST_ATTEMPT_SUBSET} from "../actions/testattempts";
+import {PUSH_PERSONALITY_ANAL, PUSH_QUALITATIVE_ANAL, PUSH_TEST_OVERVIEW, UPDATE_APPLICATION, UPDATE_TEST_ATTEMPT_SUBSET} from "../actions/testattempts";
 import {updateApplicationStatusAPI} from "../../_Api/Applications";
 
 function pushTestAttempts(data) {
@@ -16,6 +16,16 @@ function updateApplications(applications) {
 
 function updateApplicationSubsetAC(applications) {
     return {type: UPDATE_TEST_ATTEMPT_SUBSET, data: applications};
+
+}
+
+function pushQualitativeAnalysisAC(qualitativeAnalysisReport) {
+    return {type: PUSH_QUALITATIVE_ANAL, data: qualitativeAnalysisReport};
+
+}
+
+function pushPersonalityAnalysisAC(personalityAnalysisReport) {
+    return {type: PUSH_PERSONALITY_ANAL, data: personalityAnalysisReport};
 
 }
 
@@ -58,4 +68,4 @@ function updateApplicationStatusByTestAttemptIDAsyncAC(testAttemptIDs, newStatus
 }
 
 
-export {pushTestAttempts, updateApplications, updateApplicationStatusByTestAttemptIDAsyncAC};
+export {pushTestAttempts, updateApplications, updateApplicationStatusByTestAttemptIDAsyncAC, pushQualitativeAnalysisAC, pushPersonalityAnalysisAC};
