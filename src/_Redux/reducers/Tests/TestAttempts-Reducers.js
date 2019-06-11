@@ -51,7 +51,7 @@ function updateWithPersonalityAnalysis(state, personalityAnalysisAPIresponse) {
                 return;
             }
 
-            personalityReport[key] = _.round(personalityReport[key] , 0);
+            personalityReport[key] = 100 - _.round(personalityReport[key] , 0);
 
 
             delete personalityReport['test_attempt_id'];
