@@ -402,7 +402,7 @@ class ShortList extends React.Component {
 
                         let text = "";
                         if (el.includes('mind'))
-                            text = "Introvert";
+                            text = "Extrovert";
 
                         if (el.includes('energy'))
                             text = "Intuitive";
