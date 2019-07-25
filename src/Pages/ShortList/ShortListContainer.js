@@ -285,7 +285,7 @@ class ShortList extends React.Component {
 
 
         const QualitativeReportColumn = {
-            Header: "Qualitative Analysis",
+            Header: "Growth Potential",
             id: 'qualitative_analysis',
             columns: []
 

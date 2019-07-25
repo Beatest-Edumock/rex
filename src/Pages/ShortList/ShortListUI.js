@@ -145,7 +145,7 @@ class ShortListUI extends React.Component {
 
                     <Box margin="small">
                         <Box align="end" alignContent="stretch" gap="medium" direction="row">
-                            <Button primary label="Load Qualitative Analysis" onClick={this.props.onQualitativeAnalysesClick}/>
+                            <Button primary label="Load Growth Potential" onClick={this.props.onQualitativeAnalysesClick}/>
                             <Button primary label="Load Personality" onClick={this.props.onPersonalityLoadClick}/>
                         </Box>
                     </Box>
