@@ -73,6 +73,30 @@ function updateWithPersonalityAnalysis(state, personalityAnalysisAPIresponse) {
 
 }
 
+//Hack to handle null report. TO BE FIXED
+
+function createDummyReport() {
+    const dummyReport = {
+        'conceptual_level' : 0,
+        'inference_level' : 0,
+        'analytical_ability' : 0,
+        'mental_math_speed' : 0,
+        'data_interpretation_ability' : 0,
+        'domain_based_ability' : 0,
+        'logical_reasoning_ability' : 0,
+        'paragraph_writing_ability' : 0,
+        'verbal_ability' : 0,
+        'verbal_reasoning' : 0,
+        'coding_quality' : 0,
+        'create_date' : 0,
+        'algorithmic_sense' : 0,
+        'domain_knowledge' : 0,
+        'research_ability' : 0,
+        'coding_sense' : 0
+    }
+    return dummyReport;
+}
+
 function updateWithQualitativeAnalysis(state, getQualitativeAnalysisAPIResponse) {
 
     const testAttemptsArray = state.test_attempts;
@@ -84,8 +108,11 @@ function updateWithQualitativeAnalysis(state, getQualitativeAnalysisAPIResponse)
 
     const updatedTestAttempts = testAttemptsArray.map((el) => {
         const test_attempt = testAttemptsByAttemptID[el.id];
-        const report = testAttemptsByAttemptID[el.id].report;
-
+        let report = testAttemptsByAttemptID[el.id].report;
+        if (report === null) {
+            report = createDummyReport();
+            testAttemptsByAttemptID[el.id].report = report;
+        }
         Object.keys(report).map((key) => {
             if (report[key] === null) {
                 delete report[key];
